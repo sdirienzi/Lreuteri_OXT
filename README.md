@@ -64,12 +64,9 @@ Fig3A
 
 Fig3B
 
-Fig3C
-
-Fig3D
+Fig3C-D, FigS3J
 
 FigS3A-D
 
 FigS3G-I
 
-FigS3J
