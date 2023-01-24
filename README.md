@@ -59,3 +59,17 @@ FigS2D
 FigS2E
   script: Fig2_OxytocinSecretion.R
   data: FigS2e_Luminexothers.txt
+  
+Fig3A
+
+Fig3B
+
+Fig3C
+
+Fig3D
+
+FigS3A-D
+
+FigS3G-I
+
+FigS3J
