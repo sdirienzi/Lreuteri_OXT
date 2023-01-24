@@ -57,5 +57,5 @@ FigS2D
   data: Fig2e_CombinedMouseSecretionData.txt, Fig2e_mousearea.txt
 
 FigS2E
-  script:
+  script: Fig2_OxytocinSecretion.R
   data: FigS2e_Luminexothers.txt
