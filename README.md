@@ -26,16 +26,26 @@ Fig2B
 
 Fig2C
   script: Fig2_OxytocinSecretion.R
-  data:
+  data: Fig2c_pig5xdata_forR.txt
 
 Fig2D
   script: Fig2_OxytocinSecretion.R
-  data:
+  data: Fig2d_Piglet5xdataforR.txt
 
 Fig2E
   script: Fig2_OxytocinSecretion.R
-  data:
+  data: Fig2e_CombinedMouseSecretionData.txt, Fig2e_mousearea.txt
 
 Fig2F
   script: Fig2_OxytocinSecretion.R
   data:
+  
+FigS2A
+
+FigS2B
+
+FigS2C
+
+FigS2D
+
+FigS2E
