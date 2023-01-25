@@ -1,7 +1,7 @@
 # Lreuteri_OXT
 
 Fig1A
-  script: Fig1A_OXTdensityplots.R also see top of Fig3cd_GutCellAtlas.R
+  script: Fig1A_OXTdensityplots.R also see top of Fig3cd_GutCellAtlas.R for where the data files were derived
   data: Fig1a_TCL_OXT_SCTdata.txt, Fig1a_SCL_OXT_SCTdata.txt, Fig1a_REC_OXT_SCTdata.txt, Fig1a_JEJ_OXT_SCTdata.txt, Fig1a_ILE_OXT_SCTdata.txt, Fig1a_DUO_OXT_SCTdata.txt, Fig1a_DCL_OXT_SCTdata.txt, Fig1a_CAE_OXT_SCTdata.txt, Fig1a_APD_OXT_SCTdata.txt, Fig1a_ACL_OXT_SCTdata.txt
 
 Fig1C
@@ -13,7 +13,7 @@ Fig1E
   data: raw input images not available on GitHub
   
 FigS1A
-  script: FigS1a_OXTdensityplots
+  script: FigS1a_OXTdensityplots also see FigS3ghi_SeuratanalysisBeumer.R for where the data files were derived
   data: FigS1a_PYL_OXT_SCTdata.txt, FigS1a_DUO_OXT_SCTdata.txt, FigS1a_JEJ_OXT_SCTdata.txt, FigS1a_ILE_OXT_SCTdata.txt
 
 FigS1C
@@ -69,8 +69,14 @@ Fig3B
   data: Fig3b_FlowData.txt
 
 Fig3C-D, FigS3J
+  script: Fig3cd_GutCellAtlas.R
+  data: available at the Gut Cell Atals
 
 FigS3A-D
+  script: FigS3abcd_SeuratanalysisBeumer.R
+  data: avaiable with Beumer et al 2020 publication
 
 FigS3G-I
+  script: FigS3ghi_SeuratanalysisHCL.R
+  data: from Han 2020 et al publication.
 
