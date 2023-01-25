@@ -1,7 +1,7 @@
 # Lreuteri_OXT
 
 Fig1A
-  script: Fig1A_OXTdensityplots.R
+  script: Fig1A_OXTdensityplots.R also see top of Fig3cd_GutCellAtlas.R
   data: Fig1a_TCL_OXT_SCTdata.txt, Fig1a_SCL_OXT_SCTdata.txt, Fig1a_REC_OXT_SCTdata.txt, Fig1a_JEJ_OXT_SCTdata.txt, Fig1a_ILE_OXT_SCTdata.txt, Fig1a_DUO_OXT_SCTdata.txt, Fig1a_DCL_OXT_SCTdata.txt, Fig1a_CAE_OXT_SCTdata.txt, Fig1a_APD_OXT_SCTdata.txt, Fig1a_ACL_OXT_SCTdata.txt
 
 Fig1C
