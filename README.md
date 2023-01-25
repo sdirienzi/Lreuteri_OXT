@@ -61,8 +61,12 @@ FigS2E
   data: FigS2e_Luminexothers.txt
   
 Fig3A
+  script: Fig3_ExpressionFlowCytometry.R
+  data: Fig3a_qPCRdata
 
 Fig3B
+  script: Fig3_ExpressionFlowCytometry.R
+  data: Fig3b_FlowData.txt
 
 Fig3C-D, FigS3J
 
