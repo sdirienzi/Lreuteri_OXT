@@ -80,5 +80,44 @@ FigS3G-I
   script: FigS3ghi_SeuratanalysisHCL.R
   data: from Han 2020 et al publication.
   
-Fig4
+Fig4A
+  script: Fig4_Secretin.R
+  data: Fig4a_HIESecretinOxytocin.txt
+  
+Fig4B
+  script: Fig4_Secretin.R
+  data: Fig4b_HIEallSecretinOxytocin.txt
+  
+Fig4C
+  script: Fig4_Secretin.R
+  data: Fig4c_LGSecretinOxytocin.txt
+  
+Fig4D
+  script: Fig4_Secretin.R
+  data: Fig4d_HIEABblocker.txt
+  
+Fig4E
+  script: Fig4_Secretin.R
+  data: Fig4e_527inhibitor.txt
+  
+Fig4F
+  script: Fig4_Secretin.R
+  data: Fig4f_secretininhibitor.txt
+  
+Fig4G
+  script: Fig4_Secretin.R
+  data: Fig4g_LifeGift527.txt
+  
+Fig4H
+  script: Fig4_Secretin.R
+  data: Fig4h_HIEoxytocinsecretinpaired.txt
+  
+Fig4I
+  script: Fig4_Secretin.R
+  data: Fig4h_HIEoxytocinsecretinpaired.txt
+  
+Fig4J
+  script: Fig4_Secretin.R
+  data: Fig4j_LifeGiftSecretinData.txt
+  
 
