@@ -70,7 +70,7 @@ Fig3B
 
 Fig3C-D, FigS3J
   script: Fig3cd_GutCellAtlas.R
-  data: available at the Gut Cell Atals
+  data: available at the Gut Cell Atlaws
 
 FigS3A-D
   script: FigS3abcd_SeuratanalysisBeumer.R
