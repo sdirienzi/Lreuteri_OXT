@@ -1,0 +1,5 @@
+Segment	Area
+Stomach	1.3
+SI	20.8
+Cecum	1.875
+LI	3.2

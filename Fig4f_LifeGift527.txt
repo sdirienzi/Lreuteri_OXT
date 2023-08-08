@@ -1,0 +1,13 @@
+Treatment	LifeGift	Area	Oxytocin
+Krebs	LG5	2	32.191
+Krebs	LG5	2	37.592
+Krebs	LG5	2	30.433
+Lreu6475	LG5	2	347.463
+Lreu6475	LG5	2	386.05
+Lreu6475	LG5	2	339.632
+Secretin	LG5	2	816.853
+Secretin	LG5	2	317.049
+Secretin	LG5	2	157.851
+6475 + 5-27	LG5	2	7.5
+6475 + 5-27	LG5	2	7.5
+6475 + 5-27	LG5	2	7.5

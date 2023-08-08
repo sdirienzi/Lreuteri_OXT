@@ -1,0 +1,100 @@
+Plate	Well	Row	Column	CellType	Rep	Samplegroup	Batch	Sample	Primer	Replicate	SampleName	Date	CT
+testqRT_115	A1	A	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	A	nortDiff_A	CHGA	1	nortDiff_A_CHGA_1	210116	
+testqRT_115	A10	A	10	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	CHGA	3	sampleDiff_B_CHGA_3	210116	29.346
+testqRT_115	A11	A	11	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	CHGA	1	blankblank_CHGA_1	210116	
+testqRT_115	A12	A	12	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	CHGA	2	blankblank_CHGA_2	210116	
+testqRT_115	A2	A	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	A	nortDiff_A	CHGA	2	nortDiff_A_CHGA_2	210116	
+testqRT_115	A3	A	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	CHGA	1	sampleDiff_A_CHGA_1	210116	30.339
+testqRT_115	A4	A	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	CHGA	2	sampleDiff_A_CHGA_2	210116	29.009
+testqRT_115	A5	A	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	CHGA	3	sampleDiff_A_CHGA_3	210116	31.520
+testqRT_115	A6	A	6	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	B	nortDiff_B	CHGA	1	nortDiff_B_CHGA_1	210116	
+testqRT_115	A7	A	7	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	B	nortDiff_B	CHGA	2	nortDiff_B_CHGA_2	210116	
+testqRT_115	A8	A	8	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	CHGA	1	sampleDiff_B_CHGA_1	210116	28.249
+testqRT_115	A9	A	9	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	CHGA	2	sampleDiff_B_CHGA_2	210116	28.846
+testqRT_115	B1	B	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	A	nortDiff_A	GAPDH	1	nortDiff_A_GAPDH_1	210116	
+testqRT_115	B10	B	10	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	GAPDH	3	sampleDiff_B_GAPDH_3	210116	19.418
+testqRT_115	B2	B	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	A	nortDiff_A	GAPDH	2	nortDiff_A_GAPDH_2	210116	
+testqRT_115	B3	B	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	GAPDH	1	sampleDiff_A_GAPDH_1	210116	21.003
+testqRT_115	B4	B	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	GAPDH	2	sampleDiff_A_GAPDH_2	210116	21.109
+testqRT_115	B5	B	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	GAPDH	3	sampleDiff_A_GAPDH_3	210116	21.897
+testqRT_115	B6	B	6	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	B	nortDiff_B	GAPDH	1	nortDiff_B_GAPDH_1	210116	
+testqRT_115	B7	B	7	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	B	nortDiff_B	GAPDH	2	nortDiff_B_GAPDH_2	210116	
+testqRT_115	B8	B	8	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	GAPDH	1	sampleDiff_B_GAPDH_1	210116	19.856
+testqRT_115	B9	B	9	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	GAPDH	2	sampleDiff_B_GAPDH_2	210116	19.405
+testqRT_115	C1	C	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	A	nortDiff_A	OXT	1	nortDiff_A_OXT_1	210136	
+testqRT_115	C10	C	10	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	OXT	3	sampleDiff_B_OXT_3	210145	29.411
+testqRT_115	C2	C	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	A	nortDiff_A	OXT	2	nortDiff_A_OXT_2	210137	
+testqRT_115	C3	C	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	OXT	1	sampleDiff_A_OXT_1	210138	31.187
+testqRT_115	C4	C	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	OXT	2	sampleDiff_A_OXT_2	210139	29.017
+testqRT_115	C5	C	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	A	sampleDiff_A	OXT	3	sampleDiff_A_OXT_3	210140	30.321
+testqRT_115	C6	C	6	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	B	nortDiff_B	OXT	1	nortDiff_B_OXT_1	210141	
+testqRT_115	C7	C	7	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	B	nortDiff_B	OXT	2	nortDiff_B_OXT_2	210142	
+testqRT_115	C8	C	8	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	OXT	1	sampleDiff_B_OXT_1	210143	28.895
+testqRT_115	C9	C	9	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	B	sampleDiff_B	OXT	2	sampleDiff_B_OXT_2	210144	30.890
+testqRT_115	D1	D	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	A	nortDox1.0_A	CHGA	1	nortDox1.0_A_CHGA_1	210116	
+testqRT_115	D10	D	10	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	CHGA	3	sampleDox1.0_B_CHGA_3	210116	19.403
+testqRT_115	D2	D	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	A	nortDox1.0_A	CHGA	2	nortDox1.0_A_CHGA_2	210116	
+testqRT_115	D3	D	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	CHGA	1	sampleDox1.0_A_CHGA_1	210116	17.822
+testqRT_115	D4	D	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	CHGA	2	sampleDox1.0_A_CHGA_2	210116	19.039
+testqRT_115	D5	D	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	CHGA	3	sampleDox1.0_A_CHGA_3	210116	18.918
+testqRT_115	D6	D	6	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	B	nortDox1.0_B	CHGA	1	nortDox1.0_B_CHGA_1	210116	
+testqRT_115	D7	D	7	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	B	nortDox1.0_B	CHGA	2	nortDox1.0_B_CHGA_2	210116	
+testqRT_115	D8	D	8	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	CHGA	1	sampleDox1.0_B_CHGA_1	210116	19.631
+testqRT_115	D9	D	9	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	CHGA	2	sampleDox1.0_B_CHGA_2	210116	19.591
+testqRT_115	E1	E	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	A	nortDox1.0_A	GAPDH	1	nortDox1.0_A_GAPDH_1	210116	
+testqRT_115	E10	E	10	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	GAPDH	3	sampleDox1.0_B_GAPDH_3	210123	18.907
+testqRT_115	E2	E	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	A	nortDox1.0_A	GAPDH	2	nortDox1.0_A_GAPDH_2	210116	32.896
+testqRT_115	E3	E	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	GAPDH	1	sampleDox1.0_A_GAPDH_1	210116	19.193
+testqRT_115	E4	E	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	GAPDH	2	sampleDox1.0_A_GAPDH_2	210117	18.953
+testqRT_115	E5	E	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	GAPDH	3	sampleDox1.0_A_GAPDH_3	210118	19.579
+testqRT_115	E6	E	6	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	B	nortDox1.0_B	GAPDH	1	nortDox1.0_B_GAPDH_1	210119	
+testqRT_115	E7	E	7	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	B	nortDox1.0_B	GAPDH	2	nortDox1.0_B_GAPDH_2	210120	
+testqRT_115	E8	E	8	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	GAPDH	1	sampleDox1.0_B_GAPDH_1	210121	18.142
+testqRT_115	E9	E	9	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	GAPDH	2	sampleDox1.0_B_GAPDH_2	210122	19.527
+testqRT_115	F1	F	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	A	nortDox1.0_A	OXT	1	nortDox1.0_A_OXT_1	210146	
+testqRT_115	F10	F	10	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	OXT	3	sampleDox1.0_B_OXT_3	210155	32.682
+testqRT_115	F11	F	11	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	OXT	1	blankblank_OXT_1	210134	
+testqRT_115	F12	F	12	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	OXT	2	blankblank_OXT_2	210135	
+testqRT_115	F2	F	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	A	nortDox1.0_A	OXT	2	nortDox1.0_A_OXT_2	210147	
+testqRT_115	F3	F	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	OXT	1	sampleDox1.0_A_OXT_1	210148	31.084
+testqRT_115	F4	F	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	OXT	2	sampleDox1.0_A_OXT_2	210149	34.234
+testqRT_115	F5	F	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	A	sampleDox1.0_A	OXT	3	sampleDox1.0_A_OXT_3	210150	32.568
+testqRT_115	F6	F	6	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	B	nortDox1.0_B	OXT	1	nortDox1.0_B_OXT_1	210151	
+testqRT_115	F7	F	7	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	B	nortDox1.0_B	OXT	2	nortDox1.0_B_OXT_2	210152	
+testqRT_115	F8	F	8	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	OXT	1	sampleDox1.0_B_OXT_1	210153	30.978
+testqRT_115	F9	F	9	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	B	sampleDox1.0_B	OXT	2	sampleDox1.0_B_OXT_2	210154	31.385
+testqRT_115	H11	H	11	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	GAPDH	1	blankblank_GAPDH_1	210116	
+testqRT_115	H12	H	12	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	GAPDH	2	blankblank_GAPDH_2	210116	
+testqRT_116	A1	A	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	C	nortDiff_C	CHGA	1	nortDiff_C_CHGA_1	210166	Undetermined
+testqRT_116	A2	A	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	C	nortDiff_C	CHGA	2	nortDiff_C_CHGA_2	210167	Undetermined
+testqRT_116	A3	A	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	CHGA	1	sampleDiff_C_CHGA_1	210168	24.966
+testqRT_116	A4	A	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	CHGA	2	sampleDiff_C_CHGA_2	210169	24.759
+testqRT_116	A5	A	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	CHGA	3	sampleDiff_C_CHGA_3	210170	24.334
+testqRT_116	A6	A	6	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	C	sampleDox1.0_C	CHGA	1	sampleDox1.0_C_CHGA_1	210171	18.800
+testqRT_116	A7	A	7	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	C	sampleDox1.0_C	CHGA	2	sampleDox1.0_C_CHGA_2	210172	19.129
+testqRT_116	A8	A	8	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	C	nortDox1.0_C	CHGA	1	nortDox1.0_C_CHGA_1	210173	Undetermined
+testqRT_116	A9	A	9	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	C	nortDox1.0_C	CHGA	2	nortDox1.0_C_CHGA_2	210174	18.772
+testqRT_116	B6	B	6	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	CHGA	1	blankblank_CHGA_1	210211	Undetermined
+testqRT_116	B7	B	7	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	CHGA	2	blankblank_CHGA_2	210212	37.749
+testqRT_116	C1	C	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	C	nortDiff_C	GAPDH	1	nortDiff_C_GAPDH_1	210181	Undetermined
+testqRT_116	C2	C	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	C	nortDiff_C	GAPDH	2	nortDiff_C_GAPDH_2	210182	Undetermined
+testqRT_116	C3	C	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	GAPDH	1	sampleDiff_C_GAPDH_1	210183	20.586
+testqRT_116	C4	C	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	GAPDH	2	sampleDiff_C_GAPDH_2	210184	20.636
+testqRT_116	C5	C	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	GAPDH	3	sampleDiff_C_GAPDH_3	210185	20.664
+testqRT_116	C6	C	6	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	C	sampleDox1.0_C	GAPDH	1	sampleDox1.0_C_GAPDH_1	210186	19.047
+testqRT_116	C7	C	7	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	C	sampleDox1.0_C	GAPDH	2	sampleDox1.0_C_GAPDH_2	210187	18.148
+testqRT_116	C8	C	8	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	C	nortDox1.0_C	GAPDH	1	nortDox1.0_C_GAPDH_1	210188	Undetermined
+testqRT_116	C9	C	9	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	C	nortDox1.0_C	GAPDH	2	nortDox1.0_C_GAPDH_2	210189	Undetermined
+testqRT_116	D6	D	6	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	GAPDH	1	blankblank_GAPDH_1	210213	Undetermined
+testqRT_116	D7	D	7	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	GAPDH	2	blankblank_GAPDH_2	210214	Undetermined
+testqRT_116	E1	E	1	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	C	nortDiff_C	OXT	1	nortDiff_C_OXT_1	210196	Undetermined
+testqRT_116	E2	E	2	J2NGN3	3DenteroidsfromDec2020Jan2021	nortDiff	C	nortDiff_C	OXT	2	nortDiff_C_OXT_2	210197	Undetermined
+testqRT_116	E3	E	3	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	OXT	1	sampleDiff_C_OXT_1	210198	33.278
+testqRT_116	E4	E	4	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	OXT	2	sampleDiff_C_OXT_2	210199	32.556
+testqRT_116	E5	E	5	J2NGN3	3DenteroidsfromDec2020Jan2021	Diff	C	sampleDiff_C	OXT	3	sampleDiff_C_OXT_3	210200	31.775
+testqRT_116	E6	E	6	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	C	sampleDox1.0_C	OXT	1	sampleDox1.0_C_OXT_1	210201	31.548
+testqRT_116	E7	E	7	J2NGN3	3DenteroidsfromDec2020Jan2021	Ind	C	sampleDox1.0_C	OXT	2	sampleDox1.0_C_OXT_2	210202	32.852
+testqRT_116	E8	E	8	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	C	nortDox1.0_C	OXT	1	nortDox1.0_C_OXT_1	210203	Undetermined
+testqRT_116	E9	E	9	J2NGN3	3DenteroidsfromDec2020Jan2021	nortInd	C	nortDox1.0_C	OXT	2	nortDox1.0_C_OXT_2	210204	Undetermined
+testqRT_116	F6	F	6	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	OXT	1	blankblank_OXT_1	210215	Undetermined
+testqRT_116	F7	F	7	J2NGN3	3DenteroidsfromDec2020Jan2021	blank	NA	blankblank	OXT	2	blankblank_OXT_2	210216	Undetermined

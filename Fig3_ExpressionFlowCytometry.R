@@ -98,8 +98,6 @@ jitterwidth<-.75
 strokewidth<-0.5
 inductioncolors<-c("slateblue1","#F0027F","goldenrod1")
 
-mdts3$CTGAPDHnorm[3]=0.00001
-mdts3$CTGAPDHnorm[9]=0.00001
 
 
 PGAPDHplot<-ggplot(mdts3[Primer.x!="GAPDH"&(Samplegroup=="Diff"|Samplegroup=="Ind")], 
@@ -135,41 +133,6 @@ PGAPDHplot
 dev.off()
 
 dataset<-mdts3[Primer.x!="GAPDH"&(Samplegroup=="Diff"|Samplegroup=="Ind")]
-linear<-lm(CTGAPDHnorm~Samplegroup,data=dataset[Primer.x=="CHGA"])
-summary(linear)
-# Call:
-#   lm(formula = CTGAPDHnorm ~ Samplegroup, data = dataset[Primer.x == 
-#                                                            "CHGA"])
-# 
-# Residuals:
-#   1        2        3        4        5        6 
-# -0.01922 -0.01960  0.03882  0.57906 -0.36579 -0.21327 
-# 
-# Coefficients:
-#   Estimate Std. Error t value Pr(>|t|)  
-# (Intercept)     0.02124    0.20754   0.102    0.923  
-# SamplegroupInd  0.96742    0.29350   3.296    0.030 *
-#   ---
-#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-# 
-# Residual standard error: 0.3595 on 4 degrees of freedom
-# Multiple R-squared:  0.7309,	Adjusted R-squared:  0.6636 
-# F-statistic: 10.86 on 1 and 4 DF,  p-value: 0.03004
-
-emmeans(linear,pairwise~Samplegroup,adjust="none")
-# $emmeans
-# Samplegroup   emmean    SE df lower.CL upper.CL
-# Undiff      0.000427 0.169  6   -0.414    0.415
-# Diff        0.021236 0.169  6   -0.393    0.436
-# Ind         0.988660 0.169  6    0.574    1.403
-# 
-# Confidence level used: 0.95 
-# 
-# $contrasts
-# contrast      estimate   SE df t.ratio p.value
-# Undiff - Diff  -0.0208 0.24  6  -0.087  0.9336
-# Undiff - Ind   -0.9882 0.24  6  -4.124  0.0062
-# Diff - Ind     -0.9674 0.24  6  -4.037  0.0068
 
 OXTlinear<-lm(CTGAPDHnorm~Samplegroup,data=dataset[Primer.x=="OXT"])
 summary(OXTlinear)

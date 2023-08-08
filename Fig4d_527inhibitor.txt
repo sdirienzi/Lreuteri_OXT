@@ -1,0 +1,53 @@
+Treatment	Oxytocin	Experiment
+Krebs	7.5	1
+Inhibitor	7.5	1
+Krebs	7.5	1
+Inhibitor	7.5	1
+Krebs	7.5	1
+Inhibitor	7.5	1
+Krebs	7.5	2
+Inhibitor	7.5	2
+Krebs	7.5	2
+Inhibitor	7.5	2
+Krebs	7.5	2
+Inhibitor	7.5	2
+Krebs	7.5	3
+Inhibitor	7.5	3
+Krebs	7.5	3
+Inhibitor	7.5	3
+Krebs	7.5	3
+Inhibitor	7.5	3
+Krebs	7.5	4
+Inhibitor	7.5	4
+Krebs	7.5	4
+Inhibitor	7.5	4
+Krebs	7.5	4
+Inhibitor	7.5	4
+Krebs	7.5	4
+Inhibitor	7.5	4
+Secretin+ Inhibitor	18.03220546	2
+Secretin+ Inhibitor	19.47380331	2
+Secretin+ Inhibitor	19.66978397	3
+Secretin+ Inhibitor	23.02160116	1
+Secretin+ Inhibitor	23.25115736	4
+Secretin+ Inhibitor	33.59516855	4
+Secretin+ Inhibitor	34.38806629	4
+Secretin+ Inhibitor	38.35907936	4
+Secretin+ Inhibitor	38.58643779	3
+Secretin+ Inhibitor	38.92759714	3
+Secretin+ Inhibitor	41.77754978	1
+Secretin+ Inhibitor	50.30933261	2
+Secretin+ Inhibitor	53.94083007	1
+Secretin	105.3234354	4
+Secretin	106.8006532	4
+Secretin	111.2994781	4
+Secretin	115.4368916	2
+Secretin	120.4560554	1
+Secretin	122.532049	4
+Secretin	123.6590657	2
+Secretin	126.0967517	1
+Secretin	135.8179905	3
+Secretin	150.6321527	1
+Secretin	159.3546136	2
+Secretin	161.8165957	3
+Secretin	199.9494683	3

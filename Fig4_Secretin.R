@@ -17,7 +17,7 @@ library(sjstats)
 
 
 #4a: secretin causes release of oxytocin from NGN3 HIEs
-HIEoxt<-read.delim(file="Fig4a_HIEallSecretinOxytocin.txt",header=TRUE,sep="\t",check.names=FALSE)
+HIEoxt<-read.delim(file="Fig4a_NGNSecretinOxytocin.txt",header=TRUE,sep="\t",check.names=FALSE)
 
 #plot as boxplots with points and coloring
 HIEFig4A<-ggplot(HIEoxt, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
@@ -44,7 +44,7 @@ HIEFig4A<-ggplot(HIEoxt, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
     plot.title=element_blank(),
     legend.position="none"
   )
-pdf(file="HIEsecretinoxytocin.pdf",width=1.3,height=2)
+pdf(file="NGNsecretinoxytocin.pdf",width=1.3,height=2)
 grid.arrange(HIEFig4A)
 dev.off()
 
@@ -93,7 +93,7 @@ eff_size(modelemmeans,sigma = sigma(Fig4amodel),edf=6)
 # Confidence level used: 0.95 
 
 #4b secretin casuses release of oxtycoin from other HIEs
-HIEalloxt<-read.delim(file="Fig4b_HIEallSecretinOxytocin.txt",header=TRUE,sep="\t",check.names=FALSE)
+HIEalloxt<-read.delim(file="Fig4b_HIOSecretinOxytocin.txt",header=TRUE,sep="\t",check.names=FALSE)
 HIEalloxt$SegmentTreatment=paste(HIEalloxt$Segment, HIEalloxt$Treatment)
 HIEalloxt$Segment<-factor(HIEalloxt$Segment,c("Duodenum","Jejunum","Ileum", "AscendingColon"))
 
@@ -124,111 +124,48 @@ HIEallFig4B<-ggplot(HIEalloxt, aes(x=Segment,y=Oxytocin,fill=Treatment,group=Seg
     legend.position="none"
   )
 
-pdf(file="HIEallsecretinoxytocin.pdf",width=2.6,height=2)
+pdf(file="HIOsecretinoxytocin.pdf",width=2.6,height=2)
 grid.arrange(HIEallFig4B)
 dev.off()
 
-Figbmodel<-lm(Oxytocin~Treatment+(Enteroid),data=HIEalloxt)
+Figbmodel<-lmer(Oxytocin~Treatment+(1|Enteroid),data=HIEalloxt,control=lmerControl(optimizer = "bobyqa"))
 summary(Figbmodel)
-# Call:
-#   lm(formula = Oxytocin ~ Treatment + (Enteroid), data = HIEalloxt)
-# 
-# Residuals:
-#   Min      1Q  Median      3Q     Max 
-# -31.838  -8.230  -5.060   4.056  49.207 
-# 
-# Coefficients:
-#   Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)         15.7298     8.9784   1.752   0.0959 .  
-# TreatmentSecretin  113.9540     8.0305  14.190 1.46e-11 ***
-#   EnteroidD109        -0.4529    11.3569  -0.040   0.9686    
-# EnteroidIL104      -23.9739    11.3569  -2.111   0.0483 *  
-#   EnteroidJ11         -8.4923    11.3569  -0.748   0.4638    
-# ---
+Figbnullmodel<-lmer(Oxytocin~(1|Enteroid),data=HIEalloxt,control=lmerControl(optimizer = "bobyqa"))
+anova(Figbmodel,Figbnullmodel)
+# Data: HIEalloxt
+# Models:
+#   Figbnullmodel: Oxytocin ~ (1 | Enteroid)
+# Figbmodel: Oxytocin ~ Treatment + (1 | Enteroid)
+# npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+# Figbnullmodel    3 270.95 274.48 -132.47   264.95                         
+# Figbmodel        4 219.59 224.30 -105.80   211.59 53.357  1  2.781e-13 ***
+#   ---
 #   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+performance::r2(Figbmodel)
+# Conditional R2: 0.899
+# Marginal R2: 0.883
+
+HIEemmeans<-emmeans(Figbmodel,pairwise~Treatment,adjust="BH")
+HIEemmeans
+# Treatment emmean   SE  df lower.CL upper.CL
+# Krebs        7.5 6.89 6.6    -8.99       24
+# Secretin   121.5 6.89 6.6   104.96      138
 # 
-# Residual standard error: 19.67 on 19 degrees of freedom
-# Multiple R-squared:  0.916,	Adjusted R-squared:  0.8983 
-# F-statistic:  51.8 on 4 and 19 DF,  p-value: 5.854e-10
-HIEemmeans<-emmeans(Figbmodel,pairwise~Treatment+Enteroid,adjust="BH")
-# $emmeans
-# Treatment Enteroid emmean   SE df lower.CL upper.CL
-# Krebs     ASC209    15.73 8.98 19    -3.06     34.5
-# Secretin  ASC209   129.68 8.98 19   110.89    148.5
-# Krebs     D109      15.28 8.98 19    -3.52     34.1
-# Secretin  D109     129.23 8.98 19   110.44    148.0
-# Krebs     IL104     -8.24 8.98 19   -27.04     10.5
-# Secretin  IL104    105.71 8.98 19    86.92    124.5
-# Krebs     J11        7.24 8.98 19   -11.55     26.0
-# Secretin  J11      121.19 8.98 19   102.40    140.0
-# 
+# Degrees-of-freedom method: kenward-roger 
 # Confidence level used: 0.95 
 # 
 # $contrasts
-# contrast                           estimate    SE df t.ratio p.value
-# Krebs ASC209 - Secretin  ASC209    -113.954  8.03 19 -14.190  <.0001
-# Krebs ASC209 - Krebs D109             0.453 11.36 19   0.040  0.9686
-# Krebs ASC209 - Secretin  D109      -113.501 13.91 19  -8.160  <.0001
-# Krebs ASC209 - Krebs IL104           23.974 11.36 19   2.111  0.0731
-# Krebs ASC209 - Secretin  IL104      -89.980 13.91 19  -6.469  <.0001
-# Krebs ASC209 - Krebs J11              8.492 11.36 19   0.748  0.5251
-# Krebs ASC209 - Secretin  J11       -105.462 13.91 19  -7.582  <.0001
-# Secretin  ASC209 - Krebs D109       114.407 13.91 19   8.225  <.0001
-# Secretin  ASC209 - Secretin  D109     0.453 11.36 19   0.040  0.9686
-# Secretin  ASC209 - Krebs IL104      137.928 13.91 19   9.916  <.0001
-# Secretin  ASC209 - Secretin  IL104   23.974 11.36 19   2.111  0.0731
-# Secretin  ASC209 - Krebs J11        122.446 13.91 19   8.803  <.0001
-# Secretin  ASC209 - Secretin  J11      8.492 11.36 19   0.748  0.5251
-# Krebs D109 - Secretin  D109        -113.954  8.03 19 -14.190  <.0001
-# Krebs D109 - Krebs IL104             23.521 11.36 19   2.071  0.0731
-# Krebs D109 - Secretin  IL104        -90.433 13.91 19  -6.502  <.0001
-# Krebs D109 - Krebs J11                8.039 11.36 19   0.708  0.5251
-# Krebs D109 - Secretin  J11         -105.915 13.91 19  -7.615  <.0001
-# Secretin  D109 - Krebs IL104        137.475 13.91 19   9.884  <.0001
-# Secretin  D109 - Secretin  IL104     23.521 11.36 19   2.071  0.0731
-# Secretin  D109 - Krebs J11          121.993 13.91 19   8.771  <.0001
-# Secretin  D109 - Secretin  J11        8.039 11.36 19   0.708  0.5251
-# Krebs IL104 - Secretin  IL104      -113.954  8.03 19 -14.190  <.0001
-# Krebs IL104 - Krebs J11             -15.482 11.36 19  -1.363  0.2402
-# Krebs IL104 - Secretin  J11        -129.436 13.91 19  -9.306  <.0001
-# Secretin  IL104 - Krebs J11          98.472 13.91 19   7.080  <.0001
-# Secretin  IL104 - Secretin  J11     -15.482 11.36 19  -1.363  0.2402
-# Krebs J11 - Secretin  J11          -113.954  8.03 19 -14.190  <.0001
+# contrast          estimate   SE df t.ratio p.value
+# Krebs - Secretin      -114 8.03 19 -14.190  <.0001
 # 
-# P value adjustment: BH method for 28 tests 
+# Degrees-of-freedom method: kenward-roger
 
 eff_size(HIEemmeans,sigma = sigma(Figbmodel),edf=19)
-# contrast                             effect.size    SE df lower.CL upper.CL
-# (Krebs ASC209 - Secretin  ASC209)         -5.793 1.025 19  -7.9376   -3.649
-# (Krebs ASC209 - Krebs D109)                0.023 0.577 19  -1.1854    1.231
-# (Krebs ASC209 - Secretin  D109)           -5.770 1.173 19  -8.2254   -3.315
-# (Krebs ASC209 - Krebs IL104)               1.219 0.610 19  -0.0585    2.496
-# (Krebs ASC209 - Secretin  IL104)          -4.574 1.025 19  -6.7197   -2.429
-# (Krebs ASC209 - Krebs J11)                 0.432 0.582 19  -0.7855    1.649
-# (Krebs ASC209 - Secretin  J11)            -5.361 1.121 19  -7.7074   -3.015
-# (Secretin  ASC209 - Krebs D109)            5.816 1.179 19   3.3483    8.284
-# (Secretin  ASC209 - Secretin  D109)        0.023 0.577 19  -1.1854    1.231
-# (Secretin  ASC209 - Krebs IL104)           7.012 1.339 19   4.2086    9.815
-# (Secretin  ASC209 - Secretin  IL104)       1.219 0.610 19  -0.0585    2.496
-# (Secretin  ASC209 - Krebs J11)             6.225 1.233 19   3.6446    8.805
-# (Secretin  ASC209 - Secretin  J11)         0.432 0.582 19  -0.7855    1.649
-# (Krebs D109 - Secretin  D109)             -5.793 1.025 19  -7.9376   -3.649
-# (Krebs D109 - Krebs IL104)                 1.196 0.609 19  -0.0790    2.471
-# (Krebs D109 - Secretin  IL104)            -4.597 1.028 19  -6.7484   -2.446
-# (Krebs D109 - Krebs J11)                   0.409 0.581 19  -0.8076    1.625
-# (Krebs D109 - Secretin  J11)              -5.384 1.124 19  -7.7365   -3.032
-# (Secretin  D109 - Krebs IL104)             6.989 1.336 19   4.1922    9.785
-# (Secretin  D109 - Secretin  IL104)         1.196 0.609 19  -0.0790    2.471
-# (Secretin  D109 - Krebs J11)               6.202 1.230 19   3.6280    8.776
-# (Secretin  D109 - Secretin  J11)           0.409 0.581 19  -0.8076    1.625
-# (Krebs IL104 - Secretin  IL104)           -5.793 1.025 19  -7.9376   -3.649
-# (Krebs IL104 - Krebs J11)                 -0.787 0.591 19  -2.0246    0.451
-# (Krebs IL104 - Secretin  J11)             -6.580 1.280 19  -9.2600   -3.900
-# (Secretin  IL104 - Krebs J11)              5.006 1.077 19   2.7523    7.260
-# (Secretin  IL104 - Secretin  J11)         -0.787 0.591 19  -2.0246    0.451
-# (Krebs J11 - Secretin  J11)               -5.793 1.025 19  -7.9376   -3.649
+# contrast            effect.size   SE df lower.CL upper.CL
+# (Krebs - Secretin )       -5.79 1.02 19    -7.94    -3.65
 # 
 # sigma used for effect sizes: 19.67 
+# Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
 # Confidence level used: 0.95 
 
 #4c scretin causes release of oxytocin from lifegift
@@ -320,8 +257,8 @@ pdf(file="~Fig4ABC.pdf",width=5.5,height=2)
 grid.arrange(HIEFig4A,HIEallFig4B,LGFig4C,widths=c(1,2,1.2))
 dev.off()
 
-#Fig 4D antibody block experiment
-Abblock<-read.delim(file="Fig4d_HIEABblocker.txt",header=TRUE,sep="\t",check.names=FALSE)
+#Fig S4 antibody block experiment
+Abblock<-read.delim(file="FigS4_HIEABblocker.txt",header=TRUE,sep="\t",check.names=FALSE)
 Abblock$Treatment<-factor(Abblock$Treatment,c("LDM4","LDM4 +Ab","Lreu6475","Lreu6475 +Ab"))
 
 HIEFig4D<-ggplot(Abblock, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
@@ -352,8 +289,8 @@ pdf(file="~HIEABblock_Fig4D.pdf",width=1.6,height=1.6)
 grid.arrange(HIEFig4D)
 dev.off()
 
-FigDmodel<-lm(Oxytocin~Treatment,data=Abblock)
-summary(FigDmodel)
+FigS4model<-lm(Oxytocin~Treatment,data=Abblock)
+summary(FigS4model)
 # Call:
 #   lm(formula = Oxytocin ~ Treatment, data = Abblock)
 # 
@@ -374,7 +311,7 @@ summary(FigDmodel)
 # Multiple R-squared:  0.9112,	Adjusted R-squared:  0.878 
 # F-statistic: 27.38 on 3 and 8 DF,  p-value: 0.0001472
 
-FigDemmeans<-emmeans(FigDmodel,pairwise~Treatment,adjust="BH")
+FigS4emmeans<-emmeans(FigS4model,pairwise~Treatment,adjust="BH")
 # $emmeans
 # Treatment    emmean   SE df lower.CL upper.CL
 # LDM4           13.2 42.7  8    -85.3      112
@@ -406,15 +343,15 @@ eff_size(FigDemmeans,sigma = sigma(FigDmodel),edf=8)
 # sigma used for effect sizes: 73.95 
 # Confidence level used: 0.95 
 
-#4e 5-27 blockng experiment on NGN3s
-block527data<-read.delim(file="Fig4e_527inhibitor.txt",header=TRUE,sep="\t",check.names = FALSE)
+#4D 5-27 blockng experiment on NGN3s
+block527data<-read.delim(file="Fig4d_527inhibitor.txt",header=TRUE,sep="\t",check.names = FALSE)
 
 block527data$Treatment<-factor(block527data$Treatment,c("Krebs","Inhibitor","Secretin","Secretin+ Inhibitor"))
 
 shapevalues<-c(23,24,25,22)
 names(shapevalues)<-c("1","2","3","4")
 
-HIEFig4E<-ggplot(block527data, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
+HIEFig4D<-ggplot(block527data, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
   geom_boxplot(size=0.8,outlier.shape = NA,alpha = 0.4,colour="black")+ 
   geom_point(aes(shape=as.factor(Experiment)),size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
   ylab(bquote('Oxytocin (pg/ml)')) +
@@ -439,19 +376,28 @@ HIEFig4E<-ggplot(block527data, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
     plot.title=element_blank(),
     legend.position="none"
   )
-pdf(file="HIE527block_Fig4E.pdf",width=1.6,height=1.6)
-grid.arrange(HIEFig4E)
+pdf(file="HIE527block_Fig4D.pdf",width=1.8,height=1.2)
+grid.arrange(HIEFig4D)
 dev.off()
 
-FigEmodel<-lmer(Oxytocin~Treatment+(1|Experiment),data=block527data, control=lmerControl(optimizer = "bobyqa"))
-FigEnull<-lmer(Oxytocin~(1|Experiment),data=block527data, control=lmerControl(optimizer = "bobyqa"))
-anova(FigEmodel,FigEnull)
-performance::r2(FigEmodel)
+FigDmodel<-lmer(Oxytocin~Treatment+(1|Experiment),data=block527data, control=lmerControl(optimizer = "bobyqa"))
+FigDnull<-lmer(Oxytocin~(1|Experiment),data=block527data, control=lmerControl(optimizer = "bobyqa"))
+anova(FigDmodel,FigDnull)
+# Data: block527data
+# Models:
+#   FigDnull: Oxytocin ~ (1 | Experiment)
+# FigDmodel: Oxytocin ~ Treatment + (1 | Experiment)
+# npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+# FigDnull     3 568.35 574.21 -281.18   562.35                         
+# FigDmodel    6 435.63 447.34 -211.81   423.63 138.72  3  < 2.2e-16 ***
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+performance::r2(FigDmodel)
 # Conditional R2: 0.931
 # Marginal R2: 0.925
 
-summary(FigEmodel)
-FigEemmeans<-emmeans(FigEmodel,pairwise~Treatment,adjust="BH")
+summary(FigDmodel)
+FigDemmeans<-emmeans(FigDmodel,pairwise~Treatment,adjust="BH")
 # Treatment           emmean   SE   df lower.CL upper.CL
 # Krebs                 7.77 4.52 15.4    -1.83     17.4
 # Inhibitor             7.77 4.52 15.4    -1.83     17.4
@@ -471,7 +417,7 @@ FigEemmeans<-emmeans(FigEmodel,pairwise~Treatment,adjust="BH")
 # Secretin - (Secretin+ Inhibitor)     100.4 5.65 45  17.791  <.0001
 
 
-eff_size(FigEemmeans,sigma = sigma(FigEmodel), edf=45)
+eff_size(FigDemmeans,sigma = sigma(FigDmodel), edf=45)
 # contrast                            effect.size    SE df lower.CL upper.CL
 # (Krebs - Inhibitor)                        0.00 0.392 45    -0.79    0.790
 # (Krebs - Secretin)                        -8.77 1.004 45   -10.80   -6.750
@@ -484,20 +430,20 @@ eff_size(FigEemmeans,sigma = sigma(FigEmodel), edf=45)
 # Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
 # Confidence level used: 0.95
 
-#4f 5-27 on HIE with Lreu
-block527Lreudata<-read.delim(file="Fig4f_secretininhibitor.txt",header=TRUE,sep="\t",check.names = FALSE)
+#4e 5-27 on HIE with Lreu
+block527Lreudata<-read.delim(file="Fig4e_secretininhibitor.txt",header=TRUE,sep="\t",check.names = FALSE)
 
 block527Lreudata$Treatment<-factor(block527Lreudata$Treatment,c("Krebs","Secretin_inhibitor","6475","6475_5-27"))
 
 shapevalues<-c(23,24,25)
 names(shapevalues)<-c("1","2","3")
 
-HIEFig4F<-ggplot(block527Lreudata, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
+HIEFig4E<-ggplot(block527Lreudata, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
   geom_boxplot(size=0.8,outlier.shape = NA,alpha = 0.4,colour="black")+  
   geom_point(aes(shape=as.factor(Experiment)),size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
   ylab(bquote('Oxytocin (pg/ml)')) +
   scale_y_continuous(expand=c(0.05,.6,.6,.6))+
-  scale_fill_manual(values=c("#E64B35FF","#F39B7FFF","#00A087FF","#8491B4FF"))+
+  scale_fill_manual(values=c("#E64B35FF","#F39B7FFF","#4DBBD5FF","#8491B4FF"))+
   scale_shape_manual(values=shapevalues)+
   theme_classic() +
   theme(
@@ -517,13 +463,13 @@ HIEFig4F<-ggplot(block527Lreudata, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
     plot.title=element_blank(),
     legend.position="none"
   )
-pdf(file="block527Lreudata_Fig4F.pdf",width=1.6,height=1.6)
-grid.arrange(HIEFig4F)
+pdf(file="block527Lreudata_FigEF.pdf",width=1.8,height=1.2)
+grid.arrange(HIEFig4E)
 dev.off()
 
-FigFmodel<-lmer(Oxytocin~Treatment+(1|Experiment),data=block527Lreudata, control=lmerControl(optimizer = "bobyqa"))
-FigFnull<-lmer(Oxytocin~(1|Experiment),data=block527Lreudata, control=lmerControl(optimizer = "bobyqa"))
-anova(FigFmodel,FigFnull)
+FigEmodel<-lmer(Oxytocin~Treatment+(1|Experiment),data=block527Lreudata, control=lmerControl(optimizer = "bobyqa"))
+FigEnull<-lmer(Oxytocin~(1|Experiment),data=block527Lreudata, control=lmerControl(optimizer = "bobyqa"))
+anova(FigEmodel,FigEnull)
 # Data: block527Lreudata
 # Models:
 #   FigFnull: Oxytocin ~ (1 | Experiment)
@@ -533,12 +479,12 @@ anova(FigFmodel,FigFnull)
 # FigFmodel    6 496.53 507.75 -242.26   484.53 74.328  3  5.048e-16 ***
 #   ---
 #   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-performance::r2(FigFmodel)
+performance::r2(FigEmodel)
 # Conditional R2: 0.794
 # Marginal R2: 0.763
 
-summary(FigFmodel)
-FigFemmeans<-emmeans(FigFmodel,pairwise~Treatment,adjust="BH")
+summary(FigEmodel)
+FigEemmeans<-emmeans(FigEmodel,pairwise~Treatment,adjust="BH")
 # $emmeans
 # Treatment          emmean   SE   df lower.CL upper.CL
 # Krebs                9.20 13.8 6.82 -23.7156     42.1
@@ -560,7 +506,7 @@ FigFemmeans<-emmeans(FigFmodel,pairwise~Treatment,adjust="BH")
 # 
 # Degrees-of-freedom method: kenward-roger 
 # P value adjustment: BH method for 6 tests
-eff_size(FigFemmeans, sigma = sigma(FigFmodel), edf=42)
+eff_size(FigEemmeans, sigma = sigma(FigEmodel), edf=42)
 # contrast                           effect.size    SE df lower.CL upper.CL
 # (Krebs - Secretin_inhibitor)           -0.0144 0.408 42   -0.838    0.809
 # (Krebs - 6475)                         -4.5710 0.645 42   -5.872   -3.270
@@ -574,12 +520,12 @@ eff_size(FigFemmeans, sigma = sigma(FigFmodel), edf=42)
 # Confidence level used: 0.95 
 
 #4G 5-27 on LifeGift
-LGblock527data<-read.delim(file="Fig4g_LifeGift527.txt",header=TRUE,sep="\t",check.names = FALSE)
+LGblock527data<-read.delim(file="Fig4f_LifeGift527.txt",header=TRUE,sep="\t",check.names = FALSE)
 LGblock527data$Normalized<-LGblock527data$Oxytocin/LGblock527data$Area
 
 LGblock527data$Treatment<-factor(LGblock527data$Treatment,c("Krebs","Lreu6475","Secretin","6475 + 5-27"))
 
-LGFig4G<-ggplot(LGblock527data, aes(x=Treatment,y=Normalized,fill=Treatment)) +
+LGFig4f<-ggplot(LGblock527data, aes(x=Treatment,y=Normalized,fill=Treatment)) +
   geom_boxplot(size=0.8,outlier.shape = NA,alpha = 0.4,colour="black")+  #, lty=FAMI
   geom_point(shape=25,size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
   ylab(bquote('Oxytocin (pg/ml/'*cm^2*')'))+
@@ -603,11 +549,12 @@ LGFig4G<-ggplot(LGblock527data, aes(x=Treatment,y=Normalized,fill=Treatment)) +
     plot.title=element_blank(),
     legend.position="none"
   )
-pdf(file="LG527block_Fig4G.pdf",width=2,height=2)
-grid.arrange(LGFig4G)
+pdf(file="LG527block_Fig4F.pdf",width=2,height=2)
+grid.arrange(LGFig4f)
 dev.off()
 
-FigGmodel<-lm(Normalized~Treatment,data=LGblock527data)
+FigFmodel<-lm(Normalized~Treatment,data=LGblock527data)
+summary(FigFmodel)
 # Call:
 #   lm(formula = Normalized ~ Treatment, data = LGblock527data)
 # 
@@ -628,8 +575,8 @@ FigGmodel<-lm(Normalized~Treatment,data=LGblock527data)
 # Multiple R-squared:  0.6429,	Adjusted R-squared:  0.5089 
 # F-statistic:   4.8 on 3 and 8 DF,  p-value: 0.03381
 
-summary(FigGmodel)
-FigGemmeans<-emmeans(FigGmodel,pairwise~Treatment,adjust="BH")
+
+FigFemmeans<-emmeans(FigFmodel,pairwise~Treatment,adjust="BH")
 # $emmeans
 # Treatment   emmean   SE df lower.CL upper.CL
 # Krebs        16.70 49.8  8    -98.1      131
@@ -663,13 +610,17 @@ eff_size(FigGemmeans,sigma(FigGmodel),edf=8)
 # Confidence level used: 0.95 
 
 #4h oxytocin and secretin coming out of the same enteroids
-pairedoxtsct<-read.delim(file="Figh_HIEoxytocinsecretinpaired.txt",header=TRUE,sep="\t")
+pairedoxtsct<-read.delim(file="Fig4gh_HIEoxytocinsecretinpaired.txt",header=TRUE,sep="\t")
 
-pairOXTFigH<-ggplot(pairedoxtsct, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
+shapevalues<-c(23,24)
+names(shapevalues)<-c("1","2")
+
+pairOXTFigG<-ggplot(pairedoxtsct, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
   geom_boxplot(size=0.8,outlier.shape = NA,alpha = 0.4,colour="black")+  #, lty=FAMI
-  geom_point(shape=21,size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
+  geom_point(aes(shape=as.factor(Experiment)),size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
   ylab(bquote('Oxytocin (pg/ml)')) +
   scale_y_continuous(expand=c(0.05,.42,.42,.42))+
+  scale_shape_manual(values=shapevalues)+
   theme_classic() +
   theme(
     panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -689,56 +640,58 @@ pairOXTFigH<-ggplot(pairedoxtsct, aes(x=Treatment,y=Oxytocin,fill=Treatment)) +
     legend.position="none"
   )
 
-pdf(file="HIEpairOXT_Fig4H.pdf",width=1.2,height=2)
-grid.arrange(pairOXTFigH)
+pdf(file="HIEpairOXT_Fig4G.pdf",width=1.2,height=2)
+grid.arrange(pairOXTFigG)
 dev.off()
 
-FigHmodel<-lm(Oxytocin~Treatment,data=pairedoxtsct)
-summary(FigHmodel)
-# Call:
-#   lm(formula = Oxytocin ~ Treatment, data = pairedoxtsct)
-# 
-# Residuals:
-#   Min      1Q  Median      3Q     Max 
-# -52.761  -9.259   0.000   5.172  69.107 
-# 
-# Coefficients:
-#   Estimate Std. Error t value Pr(>|t|)   
-# (Intercept)           7.50      19.75   0.380  0.71718   
-# TreatmentLreu6475   121.90      27.93   4.365  0.00475 **
+FigGmodel<-lmer(Oxytocin~Treatment+(1|Experiment),data=pairedoxtsct, control=lmerControl(optimizer = "bobyqa"))
+summary(FigGmodel)
+FigGnullmodel<-lmer(Oxytocin~(1|Experiment),data=pairedoxtsct, control=lmerControl(optimizer = "bobyqa"))
+ anova(FigGmodel, FigGnullmodel)
+# Data: pairedoxtsct
+# Models:
+#   FigHnullmodel: Oxytocin ~ (1 | Experiment)
+# FigHmodel: Oxytocin ~ Treatment + (1 | Experiment)
+# npar    AIC    BIC  logLik deviance Chisq Df Pr(>Chisq)    
+# FigHnullmodel    3 96.654 96.892 -45.327   90.654                        
+# FigHmodel        4 86.654 86.972 -39.327   78.654    12  1   0.000532 ***
 #   ---
 #   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-# 
-# Residual standard error: 39.5 on 6 degrees of freedom
-# Multiple R-squared:  0.7605,	Adjusted R-squared:  0.7206 
-# F-statistic: 19.05 on 1 and 6 DF,  p-value: 0.004746
+performance::r2(FigGmodel)
+# Conditional R2: 0.824
+# Marginal R2: 0.701
 
-FigHemmeans<-emmeans(FigHmodel,pairwise~Treatment,adjust="BH")
+FigGemmeans<-emmeans(FigGmodel,pairwise~Treatment,adjust="BH")
 
 # $emmeans
-# Treatment emmean   SE df lower.CL upper.CL
-# LDM4         7.5 19.7  6    -40.8     55.8
-# Lreu6475   129.4 19.7  6     81.1    177.7
+# Treatment emmean   SE   df lower.CL upper.CL
+# LDM4         7.5 25.2 1.58   -134.5      149
+# Lreu6475   129.4 25.2 1.58    -12.6      271
 # 
+# Degrees-of-freedom method: kenward-roger 
 # Confidence level used: 0.95 
 # 
 # $contrasts
 # contrast        estimate   SE df t.ratio p.value
-# LDM4 - Lreu6475     -122 27.9  6  -4.365  0.0047
-
-eff_size(FigHemmeans,sigma = sigma(FigHmodel), edf=6)
-# contrast          effect.size   SE df lower.CL upper.CL
-# (LDM4 - Lreu6475)       -3.09 1.14  6    -5.87   -0.303
+# LDM4 - Lreu6475     -122 23.1  5  -5.281  0.0032
 # 
-# sigma used for effect sizes: 39.5 
-# Confidence level used: 0.95 
+# Degrees-of-freedom method: kenward-roger 
+
+eff_size(FigGemmeans,sigma = sigma(FigGmodel), edf=5)
+# contrast          effect.size   SE df lower.CL upper.CL
+# (LDM4 - Lreu6475)       -3.73 1.38  5    -7.27   -0.196
+# 
+# sigma used for effect sizes: 32.64 
+# Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+# Confidence level used: 0.95  
 
 #4I oxytocin and secretin coming out of the same enteroids
-pairSCTFigI<-ggplot(pairedoxtsct, aes(x=Treatment,y=Secretin,fill=Treatment)) +
+pairSCTFigH<-ggplot(pairedoxtsct, aes(x=Treatment,y=Secretin,fill=Treatment)) +
   geom_boxplot(size=0.8,outlier.shape = NA,alpha = 0.4,colour="black")+ 
-  geom_point(shape=21,size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
+  geom_point(aes(shape=as.factor(Experiment)),size=2,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black" )+
   ylab(bquote('Secretin (pg/ml)')) +
   scale_y_continuous(expand=c(0.05,.42,.42,.42))+
+  scale_shape_manual(values=shapevalues)+
   theme_classic() +
   theme(
     panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -758,53 +711,53 @@ pairSCTFigI<-ggplot(pairedoxtsct, aes(x=Treatment,y=Secretin,fill=Treatment)) +
     legend.position="none"
   )
 
-pdf(file="HIEpairSCT_Fig4I.pdf",width=1.2,height=2)
-grid.arrange(pairSCTFigI)
+pdf(file="HIEpairSCT_Fig4H.pdf",width=1.2,height=2)
+grid.arrange(pairSCTFigH)
 dev.off()
 
-FigImodel<-lm(Secretin~Treatment,data=pairedoxtsct)
-summary(FigImodel)
-# Residuals:
-#   Min       1Q   Median       3Q      Max 
-# -16.1162  -0.1497   0.0000   0.9122  13.0664 
-# 
-# Coefficients:
-#   Estimate Std. Error t value Pr(>|t|)    
-# (Intercept)          7.500      4.302   1.743    0.132    
-# TreatmentLreu6475   74.925      6.084  12.316 1.75e-05 ***
+FigHmodel<-lmer(Secretin~Treatment+(1|Experiment),data=pairedoxtsct,control=lmerControl(optimizer = "bobyqa"))
+summary(FigHmodel)
+FigHnullmodel<-lmer(Secretin~(1|Experiment),data=pairedoxtsct,control=lmerControl(optimizer = "bobyqa"))
+anova(FigHmodel, FigHnullmodel)
+# Data: pairedoxtsct
+# Models:
+#   FigInullmodel: Secretin ~ (1 | Experiment)
+# FigImodel: Secretin ~ Treatment + (1 | Experiment)
+# npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+# FigInullmodel    3 86.987 87.225 -40.493   80.987                         
+# FigImodel        4 62.756 63.074 -27.378   54.756 26.231  1  3.029e-07 ***
 #   ---
 #   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-# 
-# Residual standard error: 8.604 on 6 degrees of freedom
-# Multiple R-squared:  0.9619,	Adjusted R-squared:  0.9556 
-# F-statistic: 151.7 on 1 and 6 DF,  p-value: 1.747e-05
 
-FigIemmeans<-emmeans(FigImodel,pairwise~Treatment,adjust="BH")
+performance::r2(FigHmodel)
+# Conditional R2: 0.964
+# Marginal R2: 0.952
+
+FigHemmeans<-emmeans(FigHmodel,pairwise~Treatment,adjust="BH")
 # $emmeans
-# Treatment emmean  SE df lower.CL upper.CL
-# LDM4         7.5 4.3  6    -3.03       18
-# Lreu6475    82.4 4.3  6    71.90       93
+# Treatment emmean   SE   df lower.CL upper.CL
+# LDM4         7.5 5.01 1.99    -14.2     29.2
+# Lreu6475    82.4 5.01 1.99     60.7    104.1
 # 
+# Degrees-of-freedom method: kenward-roger 
 # Confidence level used: 0.95 
 # 
 # $contrasts
 # contrast        estimate   SE df t.ratio p.value
-# LDM4 - Lreu6475    -74.9 6.08  6 -12.316  <.0001
-# contrast          effect.size   SE df lower.CL upper.CL
-# (LDM4 - Lreu6475)       -8.71 2.61  6    -15.1    -2.32
+# LDM4 - Lreu6475    -74.9 5.52  5 -13.579  <.0001
 # 
-# sigma used for effect sizes: 8.604 
+# Degrees-of-freedom method: kenward-roger 
+
+eff_size(FigHemmeans,sigma=sigma(FigHmodel),edf=5)
+# contrast          effect.size   SE df lower.CL upper.CL
+# (LDM4 - Lreu6475)        -9.6 3.12  5    -17.6    -1.59
+# 
+# sigma used for effect sizes: 7.803 
+# Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
 # Confidence level used: 0.95 
 
-eff_size(FigIemmeans,sigma=sigma(FigImodel),edf=6)
-# contrast          effect.size   SE df lower.CL upper.CL
-# (LDM4 - Lreu6475)       -8.71 2.61  6    -15.1    -2.32
-# 
-# sigma used for effect sizes: 8.604 
-# Confidence level used: 0.95 
-
-#4J secretin released by Lreu from LifeGift
-LifeGiftSecretin<-read.delim(file="Fig4j_LifeGiftSecretinData.txt",header=TRUE,sep="\t",check.names = FALSE)
+#4I secretin released by Lreu from LifeGift
+LifeGiftSecretin<-read.delim(file="Fig4I_LifeGiftSecretinData.txt",header=TRUE,sep="\t",check.names = FALSE)
 LGtissuesize<-read.delim(file="Fig2b_LifeGiftTissuesizes.txt",header = TRUE,sep="\t")
 LGSecretinmerge<-merge(LifeGiftSecretin,LGtissuesize,by=c("LifeGift","Segment"))
 LGSecretinmerge$SCTnorm<-LGSecretinmerge$Secretin/LGSecretinmerge$Area
@@ -852,18 +805,27 @@ pdf(file="LifeGiftSCT.pdf",width=5,height=2)
 grid.arrange(LifeGiftSCTplot)
 dev.off()
 
-pdf(file="FigHIJ.pdf",width=7,height=2)
-grid.arrange(pairOXTFigH,pairSCTFigI,LifeGiftSCTplot,widths=c(1,1,4))
+pdf(file="FigGHI.pdf",width=7,height=2)
+grid.arrange(pairOXTFigG,pairSCTFigH,LifeGiftSCTplot,widths=c(1,1,4))
 dev.off()
 
-FigJmodel<-lmer(SCTnorm~Treatment*Segment + (1|LifeGift),data=LGSecretinmerge, control=lmerControl(optimizer = "bobyqa"))
-FigJnullmodel<-lmer(SCTnorm~ (1|LifeGift),data=LGSecretinmerge, control=lmerControl(optimizer = "bobyqa"))
-anova(FigJmodel, FigJnullmodel)
-performance::r2(FigJmodel)
+FigImodel<-lmer(SCTnorm~Treatment*Segment + (1|LifeGift),data=LGSecretinmerge, control=lmerControl(optimizer = "bobyqa"))
+FigInullmodel<-lmer(SCTnorm~ (1|LifeGift),data=LGSecretinmerge, control=lmerControl(optimizer = "bobyqa"))
+anova(FigImodel, FigInullmodel)
+# Data: LGSecretinmerge
+# Models:
+#   FigInullmodel: SCTnorm ~ (1 | LifeGift)
+# FigImodel: SCTnorm ~ Treatment * Segment + (1 | LifeGift)
+# npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+# FigInullmodel    3 1477.4 1486.3 -735.72   1471.4                         
+# FigImodel       18 1341.8 1395.3 -652.91   1305.8 165.62 15  < 2.2e-16 ***
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+performance::r2(FigImodel)
 # Conditional R2: 0.689
 # Marginal R2: 0.614
 
-FigJemmeans<-emmeans(FigJmodel,pairwise~Treatment|Segment,adjust="BH")
+FigIemmeans<-emmeans(FigImodel,pairwise~Treatment|Segment,adjust="BH")
 # $emmeans
 # Segment = Duodenum:
 #   Treatment emmean   SE   df lower.CL upper.CL
@@ -942,7 +904,7 @@ FigJemmeans<-emmeans(FigJmodel,pairwise~Treatment|Segment,adjust="BH")
 # 6475 - LDM4     1.03 11 126   0.094  0.9252
 # Degrees-of-freedom method: kenward-roger 
 
-eff_size(FigJemmeans, sigma=sigma(FigJmodel), edf=126)
+eff_size(FigIemmeans, sigma=sigma(FigImodel), edf=126)
 # Segment = Duodenum:
 #   contrast      effect.size    SE  df lower.CL upper.CL
 # (6475 - LDM4)      2.3497 0.494 126    1.372    3.328
@@ -978,3 +940,41 @@ eff_size(FigJemmeans, sigma=sigma(FigJmodel), edf=126)
 # sigma used for effect sizes: 23.29 
 # Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
 # Confidence level used: 0.95 
+
+#Secretin concentrations
+
+secretin<-read.delim(file="FigS5A_Secretin.txt",header=TRUE,sep="\t")
+
+shapevalues<-c(23,24,25)
+names(shapevalues)<-levels(as.factor(secretin$Experiment))
+
+
+SCTplot<-ggplot(secretin, aes(x=as.factor(SCT/100),y=OXT,group=SCT)) +
+  geom_boxplot(size=0.5,outlier.shape = NA,alpha = 0.4,colour="black")+ 
+  geom_point(aes(shape=as.factor(Experiment)),size=1.4,stroke=0.2, position=position_jitterdodge(jitter.width=0.2 ),color="black",fill="lightblue" )+
+  ylab(bquote('Oxytocin (pg/ml)')) +
+  xlab(bquote('Secretin (ng/ml)')) +
+  scale_y_continuous(expand=c(0.05,.42,.42,.42))+
+  scale_shape_manual(values=c(21,21,21))+
+  theme_classic() +
+  theme(
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    axis.ticks.y = element_line(colour = "black"),
+    axis.ticks.x = element_line(colour = "black"),
+    axis.line.x = element_line(colour = "black"),
+    axis.line.y = element_line(colour = "black"),
+    axis.title.x= element_text(size=8),
+    axis.title.y= element_text(size=8),
+    axis.text.x= element_text(size=7, colour = "black", angle=45,vjust=0.7),
+    axis.text.y= element_text(size=7, colour = "black"),
+    panel.border = element_blank(),
+    strip.background =element_blank(),
+    strip.text = element_text(size=7),
+    plot.title=element_blank(),
+    legend.position="none"
+  )
+
+pdf(file="SecretinConcentration2.pdf",width=2,height=2)
+SCTplot
+dev.off()

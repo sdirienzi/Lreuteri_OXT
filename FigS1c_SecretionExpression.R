@@ -49,7 +49,7 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
 }
 
 #Fig S1C
-mdt<-as.data.table(read.delim(file="qPCRdataD103J2NGN3.txt",header=TRUE,sep="\t",na.strings=""))
+mdt<-as.data.table(read.delim(file="FigS1c_qPCRdataD103J2NGN3.txt",header=TRUE,sep="\t",na.strings=""))
 mdt$CT<-as.numeric(as.character(mdt$CT))
 mdts<-as.data.table(summarySE(data=mdt[is.na(CT)==FALSE],measurevar = "CT",groupvars = c("CellType","Rep","treatmentname","Primer","Sample")),na.rm = TRUE)
 
@@ -71,7 +71,7 @@ mdts3$Primer.x<-factor(mdts3$Primer.x,c("LGR5","SI","OXT"))
 
 mdts3$FullSampleinfo<-paste(mdts3$CellType,mdts3$Sample,sep=" ")
 #added extra elements to fill in the NA data as 1e-5
-mdts3add<-read.delim(file="mdts3extras.txt",sep="\t",header=TRUE)
+mdts3add<-read.delim(file="FigS1c_mdts3extras.txt",sep="\t",header=TRUE)
 mdts4<-rbind(mdts3,mdts3add)
 
 mdts4$FullSampleinfo<-factor(mdts4$FullSampleinfo,c("D103 Undiff",  "NGN3 Undiff", "D103 Diff","NGN3 Diff"))
@@ -112,120 +112,110 @@ PGAPDHplot
 dev.off()
 
 mdts4<-as.data.table(mdts4)
-linear<-lm(CTGAPDHnorm~CellType+Sample,data=mdts4[Primer.x=="LGR5"])
-summary(linear)
-emmeans(linear,pairwise~CellType+Sample,adjust="none")
+
+SIlinear<-lmer(CTGAPDHnorm~Sample + (1|CellType),data=mdts4[Primer.x=="SI"],REML=FALSE,control=lmerControl(optimizer = "bobyqa"))
+SInull<-lmer(CTGAPDHnorm~(1|CellType),data=mdts4[Primer.x=="SI"],REML=FALSE,control=lmerControl(optimizer = "bobyqa"))
+anova(SIlinear,SInull)
+# Data: mdts4[Primer.x == "SI"]
+# Models:
+#   SInull: CTGAPDHnorm ~ (1 | CellType)
+# SIlinear: CTGAPDHnorm ~ Sample + (1 | CellType)
+# npar     AIC     BIC logLik deviance  Chisq Df Pr(>Chisq)   
+# SInull      3 -30.157 -28.702 18.078  -36.157                        
+# SIlinear    4 -34.809 -32.869 21.404  -42.809 6.6524  1   0.009902 **
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+performance::r2(SIlinear)
+# Marginal R2: 0.447
+
+SIemmeans<-emmeans(SIlinear,pairwise~Sample,adjust="none")
 # $emmeans
-# CellType Sample    emmean       SE df  lower.CL upper.CL
-# D103     Undiff  0.004407 0.000866  9  0.002446  0.00637
-# NGN3     Undiff  0.002493 0.000866  9  0.000533  0.00445
-# D103     Diff    0.000967 0.000866  9 -0.000993  0.00293
-# NGN3     Diff   -0.000947 0.000866  9 -0.002907  0.00101
+# Sample   emmean     SE   df lower.CL upper.CL
+# Undiff 0.000349 0.0182 5.18  -0.0459   0.0466
+# Diff   0.070333 0.0182 5.18   0.0241   0.1166
 # 
+# Degrees-of-freedom method: kenward-roger 
 # Confidence level used: 0.95 
 # 
 # $contrasts
-# contrast                  estimate      SE df t.ratio p.value
-# D103 Undiff - NGN3 Undiff  0.00191 0.00100  9   1.912  0.0881
-# D103 Undiff - D103 Diff    0.00344 0.00100  9   3.438  0.0074
-# D103 Undiff - NGN3 Diff    0.00535 0.00141  9   3.783  0.0043
-# NGN3 Undiff - D103 Diff    0.00153 0.00141  9   1.079  0.3087
-# NGN3 Undiff - NGN3 Diff    0.00344 0.00100  9   3.438  0.0074
-# D103 Diff - NGN3 Diff      0.00191 0.00100  9   1.912  0.0881
-
-SIlinear<-lm(CTGAPDHnorm~CellType+Sample,data=mdts4[Primer.x=="SI"])
-SIemmeans<-emmeans(linear,pairwise~CellType+Sample,adjust="none")
-
-# $emmeans
-# CellType Sample  emmean     SE df lower.CL upper.CL
-# D103     Undiff  0.0112 0.0226  9 -0.04000   0.0624
-# NGN3     Undiff -0.0105 0.0226  9 -0.06166   0.0407
-# D103     Diff    0.0812 0.0226  9  0.02998   0.1323
-# NGN3     Diff    0.0595 0.0226  9  0.00832   0.1107
+# contrast      estimate     SE df t.ratio p.value
+# Undiff - Diff    -0.07 0.0257 13  -2.722  0.0175
 # 
+# Degrees-of-freedom method: kenward-roger 
+
+eff_size(SIemmeans,sigma = sigma(SIlinear),edf=13)
+# contrast        effect.size    SE df lower.CL upper.CL
+# (Undiff - Diff)       -1.72 0.717 13    -3.27   -0.172
+# 
+# sigma used for effect sizes: 0.04065 
+# Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+# Confidence level used: 0.95 
+
+OXTlinear<-lmer(CTGAPDHnorm~Sample + (1|CellType),data=mdts4[Primer.x=="OXT"],REML=FALSE,control=lmerControl(optimizer = "bobyqa"))
+OXTnull<-lmer(CTGAPDHnorm~(1|CellType),data=mdts4[Primer.x=="OXT"],REML=FALSE,control=lmerControl(optimizer = "bobyqa"))
+anova(OXTlinear,OXTnull)
+# Data: mdts4[Primer.x == "OXT"]
+# Models:
+#   OXTnull: CTGAPDHnorm ~ (1 | CellType)
+# OXTlinear: CTGAPDHnorm ~ Sample + (1 | CellType)
+# npar     AIC     BIC logLik deviance  Chisq Df Pr(>Chisq)  
+# OXTnull      3 -154.93 -153.47 80.463  -160.93                       
+# OXTlinear    4 -158.91 -156.97 83.453  -166.91 5.9807  1    0.01446 *
+
+performance::r2(OXTlinear)
+
+# Conditional R2: 0.452
+# Marginal R2: 0.40
+
+OXTemmeans<-emmeans(OXTlinear,pairwise~Sample,adjust="none")
+# $emmeans
+# Sample   emmean       SE   df  lower.CL upper.CL
+# Undiff 4.54e-05 0.000131 9.57 -0.000248 0.000338
+# Diff   4.13e-04 0.000131 9.57  0.000120 0.000706
+# 
+# Degrees-of-freedom method: kenward-roger 
 # Confidence level used: 0.95 
 # 
 # $contrasts
-# contrast                  estimate     SE df t.ratio p.value
-# D103 Undiff - NGN3 Undiff   0.0217 0.0261  9   0.829  0.4285
-# D103 Undiff - D103 Diff    -0.0700 0.0261  9  -2.679  0.0252
-# D103 Undiff - NGN3 Diff    -0.0483 0.0369  9  -1.308  0.2233
-# NGN3 Undiff - D103 Diff    -0.0916 0.0369  9  -2.481  0.0350
-# NGN3 Undiff - NGN3 Diff    -0.0700 0.0261  9  -2.679  0.0252
-# D103 Diff - NGN3 Diff       0.0217 0.0261  9   0.829  0.4285
-eff_size(SIemmeans,sigma = sigma(SIlinear),edf=9)
-# contrast                    effect.size    SE df lower.CL upper.CL
-# (D103 Undiff - NGN3 Undiff)       0.479 0.588  9   -0.852  1.80944
-# (D103 Undiff - D103 Diff)        -1.547 0.683  9   -3.091 -0.00206
-# (D103 Undiff - NGN3 Diff)        -1.068 0.854  9   -3.001  0.86482
-# (NGN3 Undiff - D103 Diff)        -2.025 0.946  9   -4.165  0.11421
-# (NGN3 Undiff - NGN3 Diff)        -1.547 0.683  9   -3.091 -0.00206
-# (D103 Diff - NGN3 Diff)           0.479 0.588  9   -0.852  1.80944
+# contrast       estimate       SE   df t.ratio p.value
+# Undiff - Diff -0.000368 0.000136 11.1  -2.706  0.0203
 # 
-# sigma used for effect sizes: 0.04525 
-# Confidence level used: 0.95
+# Degrees-of-freedom method: kenward-roger
 
-OXTlinear<-lm(CTGAPDHnorm~CellType+Sample,data=mdts4[Primer.x=="OXT"])
-OXTemmeans<-emmeans(linear,pairwise~CellType+Sample,adjust="none")
-# $emmeans
-# CellType Sample    emmean       SE df  lower.CL upper.CL
-# D103     Undiff  1.57e-04 0.000118  9 -1.09e-04 0.000423
-# NGN3     Undiff -6.63e-05 0.000118  9 -3.32e-04 0.000200
-# D103     Diff    5.25e-04 0.000118  9  2.59e-04 0.000791
-# NGN3     Diff    3.01e-04 0.000118  9  3.52e-05 0.000567
+eff_size(OXTemmeans,sigma = sigma(OXTlinear),edf=11.1)
+# contrast        effect.size    SE   df lower.CL upper.CL
+#Undiff - Diff)       -1.65 0.702 11.1    -3.19   -0.104
 # 
+# sigma used for effect sizes: 0.0002232 
+# Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+# Confidence level used: 0.95 
+
+LGR5linear<-lmer(CTGAPDHnorm~Sample+(1|CellType),data=mdts4[Primer.x=="LGR5"], REML=FALSE,control=lmerControl(optimizer = "bobyqa"))
+LGR5null<-lmer(CTGAPDHnorm~(1|CellType),data=mdts4[Primer.x=="LGR5"], REML=FALSE,control=lmerControl(optimizer = "bobyqa"))
+anova(LGR5linear,LGR5null)
+performance::r2(LGR5linear)
+# Conditional R2: 0.577
+# Marginal R2: 0.505
+
+LGR5emmeans<-emmeans(LGR5linear,pairwise~Sample,adjust="none")
+# $emmeans
+# Sample  emmean      SE   df  lower.CL upper.CL
+# Undiff 0.00345 0.00108 8.19  0.000971  0.00593
+# Diff   0.00001 0.00108 8.19 -0.002469  0.00249
+# 
+# Degrees-of-freedom method: kenward-roger 
 # Confidence level used: 0.95 
 # 
 # $contrasts
-# contrast                   estimate       SE df t.ratio p.value
-# D103 Undiff - NGN3 Undiff  0.000223 0.000136  9   1.644  0.1345
-# D103 Undiff - D103 Diff   -0.000368 0.000136  9  -2.706  0.0242
-# D103 Undiff - NGN3 Diff   -0.000144 0.000192  9  -0.751  0.4721
-# NGN3 Undiff - D103 Diff   -0.000591 0.000192  9  -3.076  0.0132
-# NGN3 Undiff - NGN3 Diff   -0.000368 0.000136  9  -2.706  0.0242
-# D103 Diff - NGN3 Diff      0.000223 0.000136  9   1.644  0.1345
-
-eff_size(OXTemmeans,sigma = sigma(OXTlinear),edf=9)
-# contrast                    effect.size  SE df lower.CL upper.CL
-# (D103 Undiff - NGN3 Undiff)          92 113  9     -164  347.934
-# (D103 Undiff - D103 Diff)          -297 131  9     -594   -0.396
-# (D103 Undiff - NGN3 Diff)          -205 164  9     -577  166.295
-# (NGN3 Undiff - D103 Diff)          -389 182  9     -801   21.961
-# (NGN3 Undiff - NGN3 Diff)          -297 131  9     -594   -0.396
-# (D103 Diff - NGN3 Diff)              92 113  9     -164  347.934
+# contrast      estimate    SE   df t.ratio p.value
+# Undiff - Diff  0.00344 0.001 11.1   3.438  0.0055
 # 
-# sigma used for effect sizes: 0.0002353 
+# Degrees-of-freedom method: kenward-roger 
+
+eff_size(LGR5emmeans,sigma = sigma(LGR5linear),edf=11.1)
+# contrast        effect.size    SE   df lower.CL upper.CL
+# (Undiff - Diff)        2.09 0.753 11.1    0.436     3.75
+# 
+# sigma used for effect sizes: 0.001644 
+# Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
 # Confidence level used: 0.95 
-
-LGR5linear<-lm(CTGAPDHnorm~CellType+Sample,data=mdts4[Primer.x=="LGR5"])
-LGR5emmeans<-emmeans(linear,pairwise~CellType+Sample,adjust="none")
-# $emmeans
-# CellType Sample  emmean     SE df lower.CL upper.CL
-# D103     Undiff  0.0112 0.0226  9 -0.04000   0.0624
-# NGN3     Undiff -0.0105 0.0226  9 -0.06166   0.0407
-# D103     Diff    0.0812 0.0226  9  0.02998   0.1323
-# NGN3     Diff    0.0595 0.0226  9  0.00832   0.1107
-# 
-# Confidence level used: 0.95 
-# 
-# $contrasts
-# contrast                  estimate     SE df t.ratio p.value
-# D103 Undiff - NGN3 Undiff   0.0217 0.0261  9   0.829  0.4285
-# D103 Undiff - D103 Diff    -0.0700 0.0261  9  -2.679  0.0252
-# D103 Undiff - NGN3 Diff    -0.0483 0.0369  9  -1.308  0.2233
-# NGN3 Undiff - D103 Diff    -0.0916 0.0369  9  -2.481  0.0350
-# NGN3 Undiff - NGN3 Diff    -0.0700 0.0261  9  -2.679  0.0252
-# D103 Diff - NGN3 Diff       0.0217 0.0261  9   0.829  0.4285
-
-eff_size(LGR5emmeans,sigma = sigma(LGR5linear),edf=9)
-# contrast                    effect.size   SE df lower.CL upper.CL
-# (D103 Undiff - NGN3 Undiff)        12.5 15.4  9    -22.2  47.2456
-# (D103 Undiff - D103 Diff)         -40.4 17.8  9    -80.7  -0.0538
-# (D103 Undiff - NGN3 Diff)         -27.9 22.3  9    -78.4  22.5810
-# (NGN3 Undiff - D103 Diff)         -52.9 24.7  9   -108.7   2.9820
-# (NGN3 Undiff - NGN3 Diff)         -40.4 17.8  9    -80.7  -0.0538
-# (D103 Diff - NGN3 Diff)            12.5 15.4  9    -22.2  47.2456
-# 
-# sigma used for effect sizes: 0.001733 
-# Confidence level used: 0.95 
-

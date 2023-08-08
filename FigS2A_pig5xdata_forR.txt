@@ -1,0 +1,136 @@
+Treatment	Segment	OXT	Pigcode	Pig	Rep	OXTcorrected
+Krebs	Duodenum	15	Pig2_1	2	1	7.5
+Krebs	Jejunum	15	Pig2_1	2	1	7.5
+Krebs	Ileum	10.91803044	Pig2_1	2	1	7.5
+LDM4	Duodenum	9.217821118	Pig2_1	2	1	7.5
+LDM4	Jejunum	15	Pig2_1	2	1	7.5
+LDM4	Ileum	4.824173739	Pig2_1	2	1	7.5
+Krebs	Jejunum	15	Pig2_2	2	2	7.5
+Krebs	Ileum	15	Pig2_2	2	2	7.5
+Krebs	Ascending Colon	15	Pig2_2	2	2	7.5
+LDM4	Duodenum	5.547433959	Pig2_2	2	2	7.5
+LDM4	Jejunum	15	Pig2_2	2	2	7.5
+LDM4	Ileum	15	Pig2_2	2	2	7.5
+LDM4	Ascending Colon	8.996624917	Pig2_2	2	2	7.5
+Krebs	Ileum	6.227600514	Pig2_3	2	3	7.5
+Krebs	Ascending Colon	15	Pig2_3	2	3	7.5
+LDM4	Duodenum	0.335215011	Pig2_3	2	3	7.5
+Krebs	Ileum	NA	Pig1_1	1	1	7.5
+Krebs	Ascending Colon	NA	Pig1_1	1	1	7.5
+Krebs	Descending Colon	NA	Pig1_1	1	1	7.5
+LDM4	Ileum	NA	Pig1_1	1	1	7.5
+LDM4	Ascending Colon	NA	Pig1_1	1	1	7.5
+LDM4	Descending Colon	NA	Pig1_1	1	1	7.5
+6475	Ileum	NA	Pig1_1	1	1	7.5
+6475	Ascending Colon	NA	Pig1_1	1	1	7.5
+6475	Descending Colon	NA	Pig1_1	1	1	7.5
+Krebs	Ileum	NA	Pig1_2	1	2	7.5
+Krebs	Ascending Colon	NA	Pig1_2	1	2	7.5
+Krebs	Descending Colon	NA	Pig1_2	1	2	7.5
+LDM4	Ileum	NA	Pig1_2	1	2	7.5
+LDM4	Ascending Colon	NA	Pig1_2	1	2	7.5
+LDM4	Descending Colon	NA	Pig1_2	1	2	7.5
+6475	Ileum	NA	Pig1_2	1	2	7.5
+6475	Ascending Colon	NA	Pig1_2	1	2	7.5
+6475	Descending Colon	NA	Pig1_2	1	2	7.5
+Krebs	Ileum	NA	Pig1_3	1	3	7.5
+Krebs	Ascending Colon	NA	Pig1_3	1	3	7.5
+Krebs	Descending Colon	NA	Pig1_3	1	3	7.5
+LDM4	Ileum	NA	Pig1_3	1	3	7.5
+LDM4	Ascending Colon	NA	Pig1_3	1	3	7.5
+LDM4	Descending Colon	NA	Pig1_3	1	3	7.5
+6475	Ileum	NA	Pig1_3	1	3	7.5
+6475	Ascending Colon	NA	Pig1_3	1	3	7.5
+6475	Descending Colon	NA	Pig1_3	1	3	7.5
+Krebs	Duodenum	15	Pig3_1	3	1	7.5
+Krebs	Jejunum	15	Pig3_1	3	1	7.5
+Krebs	Ileum	NA	Pig3_1	3	1	7.5
+Krebs	Ascending Colon	NA	Pig3_1	3	1	7.5
+Krebs	Descending Colon	NA	Pig3_1	3	1	7.5
+LDM4	Duodenum	15	Pig3_1	3	1	7.5
+LDM4	Jejunum	15	Pig3_1	3	1	7.5
+LDM4	Ileum	15	Pig3_1	3	1	7.5
+LDM4	Ascending Colon	15	Pig3_1	3	1	7.5
+LDM4	Descending Colon	15	Pig3_1	3	1	7.5
+6475	Ascending Colon	15	Pig3_1	3	1	7.5
+6475	Descending Colon	15	Pig3_1	3	1	7.5
+Krebs	Duodenum	15	Pig3_2	3	2	7.5
+Krebs	Jejunum	15	Pig3_2	3	2	7.5
+Krebs	Ileum	15	Pig3_2	3	2	7.5
+Krebs	Ascending Colon	15	Pig3_2	3	2	7.5
+Krebs	Descending Colon	15	Pig3_2	3	2	7.5
+LDM4	Duodenum	15	Pig3_2	3	2	7.5
+LDM4	Jejunum	15	Pig3_2	3	2	7.5
+LDM4	Ileum	15	Pig3_2	3	2	7.5
+LDM4	Ascending Colon	15	Pig3_2	3	2	7.5
+LDM4	Descending Colon	15	Pig3_2	3	2	7.5
+6475	Ascending Colon	15	Pig3_2	3	2	7.5
+6475	Descending Colon	15	Pig3_2	3	2	7.5
+Krebs	Duodenum	15	Pig3_3	3	3	7.5
+Krebs	Jejunum	15	Pig3_3	3	3	7.5
+Krebs	Ileum	15	Pig3_3	3	3	7.5
+Krebs	Ascending Colon	15	Pig3_3	3	3	7.5
+Krebs	Descending Colon	15	Pig3_3	3	3	7.5
+LDM4	Duodenum	15	Pig3_3	3	3	7.5
+LDM4	Jejunum	15	Pig3_3	3	3	7.5
+LDM4	Ileum	15	Pig3_3	3	3	7.5
+LDM4	Ascending Colon	15	Pig3_3	3	3	7.5
+LDM4	Descending Colon	15	Pig3_3	3	3	7.5
+6475	Ascending Colon	15	Pig3_3	3	3	7.5
+6475	Descending Colon	15	Pig3_3	3	3	7.5
+LDM4	Jejunum	16.17007387	Pig2_3	2	3	16.17007387
+Krebs	Ascending Colon	16.56100448	Pig2_1	2	1	16.56100448
+Krebs	Descending Colon	19.76929477	Pig2_3	2	3	19.76929477
+LDM4	Duodenum	20.40047866	Pig1_2	1	2	20.40047866
+Krebs	Jejunum	20.81060439	Pig2_3	2	3	20.81060439
+Krebs	Descending Colon	22.44885379	Pig2_1	2	1	22.44885379
+LDM4	Descending Colon	22.64160796	Pig2_1	2	1	22.64160796
+Krebs	Duodenum	23.09409261	Pig2_2	2	2	23.09409261
+LDM4	Descending Colon	24.67601659	Pig2_3	2	3	24.67601659
+LDM4	Ileum	25.41736077	Pig2_3	2	3	25.41736077
+LDM4	Descending Colon	25.96312788	Pig2_2	2	2	25.96312788
+LDM4	Ascending Colon	26.86098461	Pig2_1	2	1	26.86098461
+LDM4	Ascending Colon	28.19960409	Pig2_3	2	3	28.19960409
+LDM4	Duodenum	28.63214689	Pig1_1	1	1	28.63214689
+LDM4	Jejunum	28.68251868	Pig1_1	1	1	28.68251868
+Krebs	Descending Colon	29.06129852	Pig2_2	2	2	29.06129852
+Krebs	Jejunum	29.24473776	Pig1_2	1	2	29.24473776
+Krebs	Jejunum	29.27064575	Pig1_1	1	1	29.27064575
+Krebs	Duodenum	29.78868517	Pig2_3	2	3	29.78868517
+Krebs	Jejunum	31.02426007	Pig1_3	1	3	31.02426007
+LDM4	Jejunum	36.62439487	Pig1_2	1	2	36.62439487
+LDM4	Duodenum	45.07218027	Pig1_3	1	3	45.07218027
+Krebs	Duodenum	52.29130948	Pig1_3	1	3	52.29130948
+Krebs	Duodenum	55.01709262	Pig1_2	1	2	55.01709262
+Krebs	Duodenum	56.35784784	Pig1_1	1	1	56.35784784
+LDM4	Jejunum	78.50776961	Pig1_3	1	3	78.50776961
+6475	Ileum	84.64212846	Pig3_2	3	2	84.64212846
+6475	Descending Colon	91.57940578	Pig2_1	2	1	91.57940578
+6475	Ascending Colon	91.71905276	Pig2_2	2	2	91.71905276
+6475	Ascending Colon	112.3909427	Pig2_3	2	3	112.3909427
+6475	Ascending Colon	113.3577255	Pig2_1	2	1	113.3577255
+6475	Ileum	130.2096039	Pig3_3	3	3	130.2096039
+6475	Descending Colon	161.3630202	Pig2_2	2	2	161.3630202
+6475	Duodenum	162.7034022	Pig3_1	3	1	162.7034022
+6475	Duodenum	195.6600401	Pig3_2	3	2	195.6600401
+6475	Duodenum	215.2652728	Pig3_3	3	3	215.2652728
+6475	Ileum	240.2793612	Pig2_3	2	3	240.2793612
+6475	Ileum	242.4532607	Pig3_1	3	1	242.4532607
+6475	Descending Colon	313.3011206	Pig2_3	2	3	313.3011206
+6475	Ileum	330.082169	Pig2_1	2	1	330.082169
+6475	Jejunum	348.4817019	Pig1_1	1	1	348.4817019
+6475	Duodenum	381.9839318	Pig1_3	1	3	381.9839318
+6475	Jejunum	403.2015042	Pig1_3	1	3	403.2015042
+6475	Duodenum	432.7093257	Pig2_2	2	2	432.7093257
+6475	Ileum	453.8060685	Pig2_2	2	2	453.8060685
+6475	Jejunum	471.5802073	Pig1_2	1	2	471.5802073
+6475	Jejunum	496.9245938	Pig2_2	2	2	496.9245938
+6475	Duodenum	518.0395107	Pig1_2	1	2	518.0395107
+6475	Jejunum	545.7122166	Pig3_2	3	2	545.7122166
+6475	Jejunum	632.4494577	Pig3_1	3	1	632.4494577
+6475	Jejunum	672.0540077	Pig2_3	2	3	672.0540077
+6475	Jejunum	760.1251541	Pig2_1	2	1	760.1251541
+6475	Jejunum	762.4100736	Pig3_3	3	3	762.4100736
+6475	Duodenum	821.4112656	Pig2_1	2	1	821.4112656
+6475	Duodenum	918.7093224	Pig2_3	2	3	918.7093224
+6475	Duodenum	1167.261674	Pig1_1	1	1	1167.261674

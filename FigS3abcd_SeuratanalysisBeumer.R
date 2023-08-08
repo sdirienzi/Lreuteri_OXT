@@ -5,6 +5,7 @@ library(stringr)
 library(gridExtra)
 
 #how to load in data provided by Beumer et al 2020
+### Can skip the beginning part using this rds file: FigS3ad_EECsubumap.rds, see line 99
 EEC.data <- read.table(file = "GSE146799_EEC_atlas_raw.csv", header = TRUE, row.names=1, sep=",", as.is=T,check.names = FALSE)
 EEC<-CreateSeuratObject(counts=EEC.data,project = "EEC",min.cells = 3, min.features = 200)
 EEC
@@ -94,6 +95,9 @@ EECsub <- FindClusters(EECsub, resolution = .9)
 
 EECsub <- RunUMAP(EECsub, dims = 1:17)
 
+saveRDS(EECsub, file = "FigS3ad_EECsubumap.rds")
+EECsub<-readRDS(file = "FigS3ad_EECsubumap.rds")
+
 pdf(file="Beumerumap.pdf",width=5,height=4)
 DimPlot(EECsub, reduction = "umap",label=TRUE)
 dev.off()
@@ -108,10 +112,8 @@ pdf(file="BeumerumapOXT.pdf",width=5,height=4)
 FeaturePlot(EECsub, features = c("OXT--chr20")) #"OXT--chr20"
 dev.off()
 
-setwd("~/Box Sync/OXT/writing/OXTexistence/filesandcode/scRNASeq/Beumer/")
 
-saveRDS(EECsub, file = "EECsubumap.rds")
-EECsub<-readRDS(file = "EECsubumap.rds")
+
 
 
 # find markers for every cluster compared to all remaining cells, report only the positive ones

@@ -17,6 +17,8 @@ options(future.globals.maxSize = 1000 * 1024^2) #or more
 #data from https://www.gutcellatlas.org/
 
 #load data from Gut Cell Atlas
+#can skip to line 167 by loading the rds file for figure 3c and d.
+#the beginning part of the script describes where the data for fig 1a came from
 Convert("epi_raw_counts02.h5ad", dest = "h5seurat", overwrite = TRUE)
 epiraw <- LoadH5Seurat("epi_raw_counts02.h5seurat")
 names(epiraw@meta.data)
@@ -84,6 +86,7 @@ batched.list <- lapply(X = batched.list, FUN = function(x) {
 mergedsctadult1<-readRDS(file="subAdult_epi_batchgreater50_counts02_mergedbatchsplit_1to15_SCT.rds")
 mergedsctadult2<-readRDS(file="subAdult_epi_batchgreater50_counts02_mergedbatchsplit_16to30_SCT.rds")
 mergedsctadult10<-merge(x=mergedsctadult1,y=mergedsctadult2)
+#repeat as needed
 
 #then split up by Region
 region.list <- SplitObject(mergedsctadult10, split.by = "Region.code")
@@ -158,7 +161,15 @@ jej.combined.sct <- FindClusters(jej.combined.sct, resolution = .8)
 # Number of communities: 11
 # Elapsed time: 0 seconds
 
+saveRDS(jej.combined.sct,file="Fig3cd_Adult_jej_nolowbatch_sctintegration.rds")
+
+#if restarting
+jej.combined.sct<-readRDS(file="Fig3cd_Adult_jej_nolowbatch_sctintegration.rds")
+Idents(jej.combined.sct)<-"seurat_clusters"  #if not set properly
+DefaultAssay(jej.combined.sct)<-"integrated"  #this has the umap data if need to switch back to umap
+
 umapplotoutsct<-DimPlot(jej.combined.sct, reduction = "umap",label=TRUE)
+
 
 
 pdf(file="adultjejumap.pdf",width=5,height=4)
@@ -166,7 +177,7 @@ umapplotoutsct
 dev.off()
 
 DefaultAssay(jej.combined.sct)<-"SCT"
-featureplotout<-FeaturePlot(jej.combined.sct, features = c("FABP2")) #,"NTS","CHGA"))
+featureplotout<-FeaturePlot(jej.combined.sct, features = c("OXT")) #,"NTS","CHGA"))
 pdf(file="adultjejfeatureplot_OXT.pdf",width=5,height=4)
 featureplotout
 dev.off()
@@ -176,26 +187,15 @@ Jej.markers <- FindAllMarkers(jej.combined.sct, only.pos = TRUE, min.pct = 0.25,
 Jej.markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC) %>% write.table(file="fromjejsubintegration_AdultJejclustermarkersSCTmethod.txt",sep="\t",row.names=FALSE)
 
 
-DefaultAssay(jej.combined.sct)<-"integrated"  #this has the umap data if need to switch back to umap
-
-DefaultAssay(jej.combined.sct)<-"SCT" #for making plots
-Idents(jej.combined.sct)<-"seurat_clusters"  #not set properly
-
 vlnclusplot<-VlnPlot(jej.combined.sct, features = c("APOA4","SLC46A1","MTRNR2L12","NR4A1","FABP1","RBP2",
                                        "APOC3","APOA1","RPS2","RPS8","BEST4","GUCA2A","REG1A",
                                        "GPX2","JUN","HSPA1B","OLFM4","TUBA1B","MUC2","CHGA",
-                                       "BMX","SH2D6", "OXT",fill.by="ident",ncol=6)
+                                       "BMX","SH2D6", "OXT"), fill="idents", ncol=6)
 
-pdf(file="violinplotclusterOXTR.pdf",height=16,width=24)
+pdf(file="violinplotclusterOXT.pdf",height=16,width=24)
 vlnclusplot
 dev.off()
 
-
-
-saveRDS(jej.combined.sct,file="Adult_jej_nolowbatch_sctintegration.rds")
-
-#if restarting
-jej.combined.sct<-readRDS(file="Adult_jej_nolowbatch_sctintegration.rds")
 
 
 #to try to get out the OXT+ positive cells markers

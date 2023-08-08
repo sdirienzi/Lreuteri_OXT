@@ -5,6 +5,8 @@ library(stringr)
 library(gridExtra)
 library(tidyverse)
 
+#can load the rds file and skip to line 118
+#this file also includes the scripts to get the OXT counts for Fig S1A
 
 #Jejunum"
 Jej.data<-read.table(file = "AdultJejunum2.rmbatchdge.txt", header=TRUE,row.names=1,sep = " ", as.is=T,check.names = FALSE)
@@ -111,20 +113,33 @@ write.table(Jejvillusnormdata,file="Jejvillusnormdata.txt",sep="\t")
 write.table(Jejvilluscounts,file="Jejvillusnormcounts.txt",sep="\t")
 
 Jejvillus <- RunUMAP(Jejvillus, dims = 1:13)
+
+saveRDS(Jejvillus, file = "FigS3gi_AdultJejvillusumap.rds")
+Jejvillus<-readRDS(file = "FigS3gi_AdultJejvillusumap.rds")
+
 Jejumapplotoutvillus<-DimPlot(Jejvillus, reduction = "umap",label=TRUE)
 
 pdf(file="Jejvillusumap.pdf",width=5,height=4)
 Jejumapplotoutvillus
 dev.off()
 
-setwd("~/OneDrive - Baylor College of Medicine/Oxt/writing/OXTexistence/filesandcode/scRNASeq/HanDatasets")
-saveRDS(Jejvillus, file = "AdultJejvillusumap.rds")
-Jejvillus<-readRDS(file = "AdultJejvillusumap.rds")
+pdf(file="JejOXTumap.pdf",width=5,height=4)
+FeaturePlot(Jejvillus, features = c("OXT"))
+dev.off()
+
+vlnclusplot<-VlnPlot(Jejvillus, features = c("APOA1","APOA4","GSTA1","FABP1","REG1A","OLFM4",
+                                             "ALDOB","APOB","IGHA1","JCHAIN","RBP2","SI",
+                                             "RPL21","RPS27","GSTA2","RPS29","MUC2","ITLN1",
+                                             "BEST4","CFTR","CHGA","GHRL","LYZ","DEFA5","OXT"),fill.by="ident",ncol=6)
+
+pdf(file="Hanviolinplotcluster.pdf",height=16,width=24)
+vlnclusplot
+dev.off()
+
 
 Jejvillus.markers <- FindAllMarkers(Jejvillus, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
 Jejvillus.markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_logFC) %>% write.table(file="Jejvillusclustermarkers.txt",sep="\t",row.names=FALSE)
 
-Jejvillus<-readRDS("AdultJejvillusumap.rds")
 #try with SCTransform
 Jejvillus<-SCTransform(Jejvillus, method = "glmGamPoi", vars.to.regress = "percent.mt",return.only.var.genes = FALSE,min_cells=1)
 OXTdata<-Jejvillus@assays$SCT@data["OXT",]
@@ -133,14 +148,7 @@ OXTcounts<-Jejvillus@assays$SCT@counts["OXT",]
 write.table(OXTdata, file="SCTdata/JEJ_OXT_SCTdata.txt",sep="\t")
 write.table(OXTcounts, file="SCTcounts/JEJ_OXT_SCTcounts.txt",sep="\t")
 
-vlnclusplot<-VlnPlot(Jejvillus, features = c("APOA1","APOA4","GSTA1","FABP1","REG1A","OLFM4",
-                                                    "ALDOB","APOB","IGHA1","JCHAIN","RBP2","SI",
-                                                    "RPL21","RPS27","GSTA2","RPS29","MUC2","ITLN1",
-                                                    "BEST4","CFTR","CHGA","GHRL","LYZ","DEFA5","OXT"),fill.by="ident",ncol=6)
 
-pdf(file="Hanviolinplotcluster.pdf",height=16,width=24)
-vlnclusplot
-dev.off()
 
 #Duodenum
 Duo.data<-read.table(file = "AdultDuodenum1.rmbatchdge.txt", header=TRUE,row.names=1,sep = " ", as.is=T,check.names = FALSE)
