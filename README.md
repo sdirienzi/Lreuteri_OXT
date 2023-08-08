@@ -5,12 +5,12 @@ Fig1A
   data: Fig1a_TCL_OXT_SCTdata.txt, Fig1a_SCL_OXT_SCTdata.txt, Fig1a_REC_OXT_SCTdata.txt, Fig1a_JEJ_OXT_SCTdata.txt, Fig1a_ILE_OXT_SCTdata.txt, Fig1a_DUO_OXT_SCTdata.txt, Fig1a_DCL_OXT_SCTdata.txt, Fig1a_CAE_OXT_SCTdata.txt, Fig1a_APD_OXT_SCTdata.txt, Fig1a_ACL_OXT_SCTdata.txt
 
 Fig1C
-  script: Matlab script Fig1ce_loop.m which depends on Fig1ce_countCell_using Area.m, Fig1ce_cleanSegmentation.m, and Fig1ce_cleanMask.m
-  data: raw input images not available on GitHub
+  script: Fig1ce_imagingcounts.R; data generated from images processed in Matlab script Fig1ce_loop.m which depends on Fig1ce_countCell_using Area.m, Fig1ce_cleanSegmentation.m, and Fig1ce_cleanMask.m
+  data: Fig1c.txt
 
 Fig1E
-  script: Matlab script Fig1ce_loop.m which depends on Fig1ce_countCell_using Area.m, Fig1ce_cleanSegmentation.m, and Fig1ce_cleanMask.m
-  data: raw input images not available on GitHub
+  script: Fig1ce_imagingcounts.R; data generated from images processed in Matlab script Fig1ce_loop.m which depends on Fig1ce_countCell_using Area.m, Fig1ce_cleanSegmentation.m, and Fig1ce_cleanMask.m
+  data: Fig1e.txt
   
 FigS1A
   script: FigS1a_OXTdensityplots also see FigS3ghi_SeuratanalysisBeumer.R for where the data files were derived
@@ -18,51 +18,51 @@ FigS1A
 
 FigS1C
   script: FigS1c_SecretionExpression.R
-  data: FigS1c_qPCRdataD103J2NGN3.txt
+  data: FigS1c_qPCRdataD103J2NGN3.txt FigS1c_mdts3extras.txt
   
 Fig2B
-  script: Fig2_OxytocinSecretion.R
+  script: Fig2_OxytocinSecretion_V2.R
   data: Fig2b_AllLifeGiftsecretionLreu.txt, Fig2b_LifeGiftTissuesizes.txt
 
 Fig2C
-  script: Fig2_OxytocinSecretion.R
-  data: Fig2c_pig5xdata_forR.txt
+  script: Fig2_OxytocinSecretion_V2.R
+  data: Fig2c_CombinedMouseSecretionData.txt Fig2_mousearea.txt
 
 Fig2D
-  script: Fig2_OxytocinSecretion.R
-  data: Fig2d_Piglet5xdataforR.txt
+  script: Fig2_OxytocinSecretion_V2.R
+  data: Fig2d_Luminex6475.txt
 
 Fig2E
   script: Fig2_OxytocinSecretion.R
-  data: Fig2e_CombinedMouseSecretionData.txt, Fig2e_mousearea.txt
-
-Fig2F
-  script: Fig2_OxytocinSecretion.R
-  data: Fig2f_Luminex6475.txt
+  data: Fig2e_others.txt
   
 FigS2A
-  script: Fig2_OxytocinSecretion.R
+  script: Fig2_OxytocinSecretion_V2.R
   data: Fig2c_pig5xdata_forR.txt
 
 FigS2B
-  script: Fig2_OxytocinSecretion.R
+  script: Fig2_OxytocinSecretion_V2.R
   data: Fig2d_Piglet5xdataforR.txt
 
 FigS2C
-  script: Fig2_OxytocinSecretion.R
-  data: Fig2e_CombinedMouseSecretionData.txt, Fig2e_mousearea.txt
+  script: Fig2_OxytocinSecretion_V2.R
+  data: Fig2c_CombinedMouseSecretionData.txt Fig2_mousearea.txt
 
 FigS2D
-  script: Fig2_OxytocinSecretion.R
-  data: Fig2e_CombinedMouseSecretionData.txt, Fig2e_mousearea.txt
+  script: Fig2_OxytocinSecretion_V2.R
+  data: Fig2c_CombinedMouseSecretionData.txt Fig2_mousearea.txt
 
 FigS2E
-  script: Fig2_OxytocinSecretion.R
-  data: FigS2e_Luminexothers.txt
+  script: SupplementalPrestoBlueGrowthPlots.R
+  data: FigS2e_PrestoBlue.txt
+
+FigS2F
+  script: SupplementalPrestoBlueGrowthPlots.R
+  data: FigS2f_growthcurves.txt
   
 Fig3A
   script: Fig3_ExpressionFlowCytometry.R
-  data: Fig3a_qPCRdata
+  data: Fig3a_qPCRdata.txt
 
 Fig3B
   script: Fig3_ExpressionFlowCytometry.R
@@ -82,11 +82,11 @@ FigS3G-I
   
 Fig4A
   script: Fig4_Secretin.R
-  data: Fig4a_HIESecretinOxytocin.txt
+  data: Fig4a_NGNSecretinOxytocin.txt
   
 Fig4B
   script: Fig4_Secretin.R
-  data: Fig4b_HIEallSecretinOxytocin.txt
+  data: Fig4b_HIOSecretinOxytocin.txt
   
 Fig4C
   script: Fig4_Secretin.R
@@ -94,30 +94,33 @@ Fig4C
   
 Fig4D
   script: Fig4_Secretin.R
-  data: Fig4d_HIEABblocker.txt
+  data: Fig4d_527inhibitor.txt
   
 Fig4E
   script: Fig4_Secretin.R
-  data: Fig4e_527inhibitor.txt
+  data: Fig4e_secretininhibitor.txt
   
 Fig4F
   script: Fig4_Secretin.R
-  data: Fig4f_secretininhibitor.txt
+  data: Fig4f_LifeGift527.txt
   
 Fig4G
   script: Fig4_Secretin.R
-  data: Fig4g_LifeGift527.txt
+  data: Fig4gh_HIEoxytocinsecretinpaired.txt
   
 Fig4H
   script: Fig4_Secretin.R
-  data: Fig4h_HIEoxytocinsecretinpaired.txt
+  data: Fig4gh_HIEoxytocinsecretinpaired.txt
   
 Fig4I
   script: Fig4_Secretin.R
-  data: Fig4h_HIEoxytocinsecretinpaired.txt
-  
-Fig4J
-  script: Fig4_Secretin.R
-  data: Fig4j_LifeGiftSecretinData.txt
-  
+  data: Fig4i_LifeGiftSecretinData.txt
 
+FigS4
+  script: Fig4_Secretin.R
+  data: FigS4_HIEABblocker.txt
+
+Fig S5A
+  script: Fig4_Secretin.R
+  data: FigS5A_Secretin.txt
+  
